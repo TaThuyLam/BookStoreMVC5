@@ -1,0 +1,72 @@
+﻿
+@using WebsiteBanSach.Models
+@if (Session["TaiKhoan"] == null)
+{
+    <a class="">
+        <i class="fa fa-sign-in" aria-hidden="true"></i>
+
+
+
+        @Html.ActionLink("Đăng ký", "Dangky", "NguoiDung")
+    </a>
+    <a href="">
+        <i class="fa fa-unlock" aria-hidden="true"></i>
+        @Html.ActionLink("Đăng Nhập", "DangNhap", "NguoiDung")
+    </a>
+
+
+
+}
+else
+{
+    KhachHang kh = (KhachHang)Session["TaiKhoan"];
+<ul style="list-style-type:none; margin-bottom:0px;">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" style="margin:0px">
+            <i class="fa fa-user-circle" aria-hidden="true"></i>
+            @Session["name"]
+        </a>
+        <ul class="dropdown-menu" style="padding: 0px ; width:205px">
+
+
+
+            <li style="margin-top:-10px">
+                <a href="@Url.Action("ChinhSua", "NguoiDung",new {maKH=kh.MaKH})" style="color:black">
+                    <p style="display: flex; margin-left: 17px; width: 170px; justify-content: space-evenly">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        Thông tin tài khoản
+                    </p>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("LichSuMuaHang", "NguoiDung",new {maKH=kh.MaKH})" style="color:black">
+                    <p style="margin-top: -25px; margin-left: 17px; width: 170px; display: flex; align-items: center; justify-content: space-evenly; "><i class='fa fa-history' aria-hidden="true"></i>Lịch sử mua hàng</p>
+
+
+
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("DangXuat", "NguoiDung")" style="color:black">
+                    <p style="margin-top: -25px; margin-left: 17px; width: 110px; display: flex; align-items: center; justify-content: space-evenly; "><i class="fa fa-sign-out" aria-hidden="true"></i>Đăng xuất</p>
+
+
+
+                </a>
+            </li>
+            @*<li class="li-a-Book" style="width:100px; text-align:center">
+                    <a href="@Url.Action("TatCa", "Sach")"
+                       class="a-allBook">Tất cả sách</a>
+                </li>*@
+        </ul>
+    </li>
+</ul>
+@*<a>
+         <i class="fa fa-user-circle" aria-hidden="true"></i>
+         @Session["name"]
+
+
+
+    </a>*@
+
+}

@@ -1,0 +1,204 @@
+﻿@using WebsiteBanSach.Models
+@model List<GioHang>
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+<style>
+    :root {
+        --colorOrange: #F3c93e;
+        --backgr: #3a4468;
+    }
+
+    body {
+        background-color: white;
+    }
+    .mt-3{
+        margin:auto;
+        width:50%;
+    }
+    .delete-edit:hover {
+        color: red
+    }
+    .btn_DatHang {
+        width: 95%;
+        margin-left: 13px;
+        margin-bottom:10px;
+    }
+
+        .btn_DatHang:hover {
+            color: white;
+            background-color: var(--backgr);
+        }
+.background-white{
+    background-color:white;
+}
+
+    table {
+        border-collapse: collapse;
+    }
+    td, th {
+        border: none;
+        justify-content: center;
+        padding:10px;
+    }
+    .container-grid{
+        display:grid;
+        grid-template-columns:auto auto;
+        justify-items:start;
+        align-items:center;
+        margin-bottom:20px;
+        line-height:30px;
+    }
+    .container-item{
+        height:auto;
+        margin-left:20px;
+        text-align:right
+    }
+    .sum {
+        color: #3A4468;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .table-bordered > :not(caption) > *{
+        line-height:32px;
+    }
+    .form-thanhtoan{
+        display:flex;
+
+    }
+    .thanhtoan-right {
+        width: 32%;
+        padding-top: 20px;
+        border: 1px solid #ddd;
+        height: fit-content;
+    }
+    .dongia{
+        font-size:14px;
+    }
+    .table.table-bordered.table-sm tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    .table.table-bordered.table-sm td, .table.table-bordered.table-sm th {
+        border: 1px solid #ddd;
+        
+    }
+</style>
+<body>
+   
+    <div class="container mt-3" style=" width: 90%; text-align: start;">
+        <h5 style="padding-top:5px; padding-bottom:10px; font-weight:bold"> Giỏ hàng của bạn</h5>
+        @*<hr style="background-color: #3A4468;height:2px" />*@
+        @{
+            double s = 0;
+        }
+    </div>
+    <div style="display: flex; justify-content: space-evenly; margin-bottom: 100px;">
+        <table class="table table-bordered table-sm" style="width: 48%; border: 1px solid #ddd;">
+            <thead>
+                <tr class="background-white">
+                    <th colspan="2"></th>
+                    <th style="text-align:center">Số Lượng</th>
+                    <th style="text-align:center">Thành Tiền</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="cart-item">
+                @foreach (var item in Model)
+                {
+                    s += item.ThanhTien;
+                    <tr class="cart-rows background-white">
+
+                        <td>
+                            <img src="@Url.Content("~/ImgProducts/"+item.sAnhBia)" height="70" style="padding: 10px 0px 0px 10px;" />
+                        </td>
+                        <td style="padding-left:15px;">
+                            <p>@item.sTenSach</p>
+                            <span class="dongia"> @string.Format("{0:0,0}", @item.dDonGia)</span> đ
+                        </td>
+
+
+
+                        @using (Html.BeginForm("CapNhapGioHang", "GioHang", new { @iMaSP = item.iMaSach }))
+                        {
+                            <td style="text-align: center;width:120px " name="soluong">
+                                <input onchange="this.form.submit()" type="number" name="txtSoLuong" min="1" value="@item.iSoLuong" style=" width:50%;max-width:100%; height: 30%; text-align: center; margin-top: 14px;" />
+
+                            </td>
+                        }
+                        <td class="thanhtien">
+                            <span> @string.Format("{0:0,0}", item.ThanhTien)<u>đ</u></span>
+                        </td>
+                        <td style="width:50px;">
+                            @*Chỉnh suaử giỏ hàng gọi về action Xóa GioHang*@
+                            @*@Html.ActionLink("Xóa", "XoaGioHang", new { @iMaSP = item.iMaSach })*@
+                            <a href="@Url.Action("XoaGioHang", new { @iMaSP = item.iMaSach })" style="padding-left:12px"><i class="fa fa-trash" aria-hidden="true"></i></a>
+
+                        </td>
+
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+        <tr class="background-white">
+            <td colspan="2"></td>
+            <td colspan="3">
+                <div class="thanhtoan-right">
+                    <div class="container-grid">
+                        <div class="container-item">
+                            Tổng tiền hàng:
+                        </div>
+                        <div class="container-item">
+                            <span class="sum">@string.Format("{0:0,00}",@s)đ</span>
+                        </div>
+                        <div class="container-item">
+                            Phí vận chuyển:
+                        </div>
+                        <div class="container-item">
+                            @string.Format("{0:0,00}",10000)
+                        </div>
+                        <div class="container-item">
+                            Giảm giá:
+                        </div>
+                        <div class="container-item">
+                            0 đ
+                        </div>
+                    </div>
+                    <hr style="background-color: #3A4468;height:1px" />
+                    <div class="container-grid">
+                        <div class="container-item" style="font-size:20px;color:red;font-weight:bold">
+                            TỔNG CỘNG:
+                        </div>
+                        <div class="container-item" style="font-size:20px;color:red;font-weight:bold">
+                            @string.Format("{0:0,00}", s + 10000)đ
+                            
+                        </div>
+                    </div>
+                    <tr>
+                        <td colspan="5">  <a class="btn btn-success btn_DatHang" href="@Url.Action("ThanhToan","GioHang")">Đặt hàng</a> </td>
+                    </tr>
+                </div>                               
+            </td>
+        </tr>        
+    </div>
+</body>
+
+<script>
+    function UpdateGioHang() {
+        var sum = 0;
+
+       var a = document.querySelector(".thanhtien");
+        var cart_item = document.getElementsByClassName("cart-item")[0];
+        var cart_row = cart_item.getElementsByClassName('cart-rows');
+        for (var i = 0; i < cart_row.length; i++) {
+            cart_row[i].querySelector(".thanhtien").textContent=parseInt(document.getElementsByName('txtSoLuong')[i].value) * parseInt(cart_row[i].querySelector(".dongia").textContent) + ",000đ";
+            sum += parseInt(cart_row[i].querySelector(".thanhtien").textContent);
+              
+        }
+        document.querySelector(".sum").textContent = sum * 1000 +"đ";
+        
+
+    }
+</script>

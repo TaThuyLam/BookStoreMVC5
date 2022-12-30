@@ -1,0 +1,136 @@
+D:\WebsiteBanSach\WebsiteBanSach\bin\WebsiteBanSach.dll.config
+D:\WebsiteBanSach\WebsiteBanSach\bin\WebsiteBanSach.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\WebsiteBanSach.pdb
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\csc.exe
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\csc.exe.config
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\csc.rsp
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\csi.exe
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\csi.exe.config
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\csi.rsp
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\Microsoft.Managed.Core.targets
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\System.Buffers.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\System.Collections.Immutable.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\System.Memory.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\System.Numerics.Vectors.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\System.Reflection.Metadata.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\System.Threading.Tasks.Extensions.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\vbc.exe
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\vbc.exe.config
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\vbc.rsp
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\VBCSCompiler.exe
+D:\WebsiteBanSach\WebsiteBanSach\bin\roslyn\VBCSCompiler.exe.config
+D:\WebsiteBanSach\WebsiteBanSach\bin\Antlr3.Runtime.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\EntityFramework.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\EntityFramework.SqlServer.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\Microsoft.Web.Infrastructure.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\Newtonsoft.Json.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\PagedList.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\PagedList.Mvc.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\System.Web.Helpers.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\System.Web.Mvc.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\System.Web.Optimization.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\System.Web.Razor.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\System.Web.WebPages.Deployment.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\System.Web.WebPages.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\System.Web.WebPages.Razor.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\WebGrease.dll
+D:\WebsiteBanSach\WebsiteBanSach\bin\EntityFramework.xml
+D:\WebsiteBanSach\WebsiteBanSach\bin\EntityFramework.SqlServer.xml
+D:\WebsiteBanSach\WebsiteBanSach\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\WebsiteBanSach\WebsiteBanSach\bin\Newtonsoft.Json.xml
+D:\WebsiteBanSach\WebsiteBanSach\bin\PagedList.xml
+D:\WebsiteBanSach\WebsiteBanSach\bin\PagedList.Mvc.xml
+D:\WebsiteBanSach\WebsiteBanSach\bin\System.Web.Helpers.xml
+D:\WebsiteBanSach\WebsiteBanSach\bin\System.Web.Mvc.xml
+D:\WebsiteBanSach\WebsiteBanSach\bin\System.Web.Razor.xml
+D:\WebsiteBanSach\WebsiteBanSach\bin\System.Web.WebPages.xml
+D:\WebsiteBanSach\WebsiteBanSach\bin\System.Web.WebPages.Deployment.xml
+D:\WebsiteBanSach\WebsiteBanSach\bin\System.Web.WebPages.Razor.xml
+D:\WebsiteBanSach\WebsiteBanSach\bin\System.Web.Optimization.xml
+D:\WebsiteBanSach\WebsiteBanSach\bin\Antlr3.Runtime.pdb
+D:\WebsiteBanSach\WebsiteBanSach\obj\Release\WebsiteBanSach.csproj.AssemblyReference.cache
+D:\WebsiteBanSach\WebsiteBanSach\obj\Release\WebsiteBanSach.csproj.CoreCompileInputs.cache
+D:\WebsiteBanSach\WebsiteBanSach\obj\Release\WebsiteBanSach.csproj.CopyComplete
+D:\WebsiteBanSach\WebsiteBanSach\obj\Release\WebsiteBanSach.dll
+D:\WebsiteBanSach\WebsiteBanSach\obj\Release\WebsiteBanSach.pdb
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\WebsiteBanSach.dll.config
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\WebsiteBanSach.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\WebsiteBanSach.pdb
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\csc.exe
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\csc.exe.config
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\csc.rsp
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\csi.exe
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\csi.exe.config
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\csi.rsp
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\Microsoft.Managed.Core.targets
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\System.Buffers.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\System.Collections.Immutable.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\System.Memory.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\System.Numerics.Vectors.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\System.Reflection.Metadata.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\System.Threading.Tasks.Extensions.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\vbc.exe
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\vbc.exe.config
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\vbc.rsp
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\VBCSCompiler.exe
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\roslyn\VBCSCompiler.exe.config
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\Antlr3.Runtime.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\EntityFramework.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\EntityFramework.SqlServer.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\Microsoft.Web.Infrastructure.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\Newtonsoft.Json.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\PagedList.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\PagedList.Mvc.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\System.Web.Helpers.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\System.Web.Mvc.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\System.Web.Optimization.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\System.Web.Razor.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\System.Web.WebPages.Deployment.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\System.Web.WebPages.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\System.Web.WebPages.Razor.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\WebGrease.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\EntityFramework.xml
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\EntityFramework.SqlServer.xml
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\Newtonsoft.Json.xml
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\PagedList.xml
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\PagedList.Mvc.xml
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\System.Web.Helpers.xml
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\System.Web.Mvc.xml
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\System.Web.Razor.xml
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\System.Web.WebPages.xml
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\System.Web.WebPages.Deployment.xml
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\System.Web.WebPages.Razor.xml
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\System.Web.Optimization.xml
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\bin\Antlr3.Runtime.pdb
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\obj\Release\WebsiteBanSach.csproj.AssemblyReference.cache
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\obj\Release\WebsiteBanSach.csproj.CoreCompileInputs.cache
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\obj\Release\WebsiteBanSach.csproj.CopyComplete
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\obj\Release\WebsiteBanSach.dll
+D:\Lập trình\Thương mại điện tử\WebsiteBanSach\WebsiteBanSach\obj\Release\WebsiteBanSach.pdb

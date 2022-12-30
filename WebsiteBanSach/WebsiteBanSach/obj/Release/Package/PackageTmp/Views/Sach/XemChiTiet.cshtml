@@ -1,0 +1,279 @@
+﻿@using WebsiteBanSach.Models;
+@model Sach
+
+<link href="~/Content/XemChiTiet.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "XemChiTiet";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="~/Scripts/bootstrap.bundle.min.js"></script>
+<style>
+    a {
+        text-decoration: none;
+    }
+
+    #img-book {
+        width: 20%;
+        /*margin-left:-480px;*/
+        margin-top: 25px;
+        margin-left: 9%;
+    }
+    .li-item{
+        width:fit-content;
+    }
+    .div-box-detail {
+        display: flex;
+        justify-content: flex-start;
+        /*margin-left:-267px;*/
+    }
+
+    .item5 {
+        grid-area: footer;
+    }
+
+    .p-desciption {
+        width: 85%;
+        margin-left: 9%;
+        margin-top: 15px;
+        padding-bottom:35px;
+    }
+
+    .p-price {
+        font-size: 27px;
+        font-weight: 700;
+        color: red;
+    }
+
+    .menu-mini {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-left: 240px;
+        text-transform: uppercase;
+        font-size: 15px;
+        margin-top:20px;
+    }
+
+    .header {
+        width: max-content;
+    }
+
+    .img-name-box {
+        /*border: 1px solid black;*/
+        width: 71%;
+        margin-left: 241px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.0), 0 5px 12px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .table-description {
+        width: 45%;
+        margin: 25px 0px 0px 65px;
+        display: flex;
+        justify-content: space-between;
+        line-height: 35px;
+    }
+
+    .carousel-inner {
+        width: 88%;
+        margin: 30px 100px 100px 100px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.0), 0 5px 12px 0 rgba(0, 0, 0, 0.2);
+    }    
+    .flex-item-carousel{
+        display:flex;       
+        list-style-type:none;
+        padding-left:100px;
+        margin-top:25px;
+    }
+    .d-block{
+        width:40%;
+    }
+    p {
+        width: fit-content;
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+</style>
+<section>
+    <div class="header">
+        <p class="menu-mini">
+            @Model.ChuDe.TenChuDe<i class="fa fa-angle-right" aria-hidden="true" style="width: 20px; text-align: center"></i>
+            @Model.TenSach.ToString()
+        </p>
+    </div>
+    <div>
+        <div class="box_detail">
+            @*<center>*@
+            <div class="img-name-box">
+                <div class="div-box-detail">
+                    <img src="@Url.Content("~/ImgProducts/" + Model.AnhBia)" id="img-book" class="img">
+
+                    <div style="height:fit-content; line-height:45px; margin-left:75px; margin-top:25px" class="div-description">
+                        <b style="font-family:'Poppins', sans-serif; font-size:35px; width:fit-content; height:fit-content">
+                            @Model.TenSach
+                        </b>
+                        <br />
+
+                        <span><b style="width:fit-content ;height:fit-content">Chủ đề:</b> @ViewBag.TenChuDe</span>
+                        <br />
+
+                        <b style="width: fit-content; height: fit-content">Nhà Xuất Bản:</b> @ViewBag.TenNXB
+
+                        <p class="p-price"> @string.Format("{0:0,0}", Model.GiaBan)&nbsp;<u style="text-decoration:none">đ</u></p>
+                        @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMaSach = Model.MaSach, @strUrl = Request.Url.ToString() }))
+                        {
+                            <span class="btn btn-primary" style="width:140px;height:40px; background-color:coral;text-align:center; border:0px">
+                                <i class="fa fa-shopping-cart"></i>
+                                <input type="submit" value=" Mua Hàng" style="background-color:coral; border:none; color:white">
+                            </span>
+                        }
+                    </div>
+
+                </div>
+                <h5 style="margin-left: 9%; margin-top: 30px; font-weight:bold">Thông tin sản phẩm</h5>
+                <div class="table-description">
+
+                    <ul style="list-style-type:none">
+                        <li>Mã sách</li>
+                        <li>Tác giả</li>
+                        <li>Nhà xuất bản</li>
+                    </ul>
+                    <ul style="list-style-type:none">
+                        <li>@Model.MaSach</li>
+                        <li>@Model.TenSach</li>
+                        <li>@Model.NhaXuatBan.TenNXB</li>
+                    </ul>
+                </div>
+                <div style="width: 900px; border-top: 1px solid #00000038; margin-left: 9%;"></div>
+                <p class="p-desciption">
+                    @Model.MoTa
+                </p>
+            </div>
+        </div>
+    </div>
+    <br />
+</section>
+<h5 style="margin-top:50px; margin-left:100px">BOOKPLUS GIỚI THIỆU</h5>
+<div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+    <!-- Indicators/dots -->
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+    </div>
+
+    <!-- The slideshow/carousel -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div>
+                <ul class="flex-item-carousel">
+                    <li class="li-item">
+                        <img src="~/ImgProducts/theshining.jpg" alt="Los Angeles" class="d-block">
+                        <p class="label-item-carou">The Shinning</p>
+                        <p>256.000 đ</p>
+                    </li>
+                    <li class="li-item">
+                        <img src="~/ImgProducts/theshining.jpg" alt="Los Angeles" class="d-block">
+                        <p class="label-item-carou">The Shinning</p>
+                        <p>256.000 đ</p>
+                    </li>
+                    <li class="li-item">
+                        <img src="~/ImgProducts/sungvitrungthep.jpg" alt="Los Angeles" class="d-block">
+                        <p class="label-item-carou">The Shinning</p>
+                        <p>256.000 đ</p>
+                    </li>
+                    <li class="li-item">
+                        <img src="~/ImgProducts/theshining.jpg" alt="Los Angeles" class="d-block">
+                        <p class="label-item-carou">The Shinning</p>
+                        <p>256.000 đ</p>
+                    </li>
+                    <li class="li-item">
+                        <img src="~/ImgProducts/sungvitrungthep.jpg" alt="Los Angeles" class="d-block">
+                        <p class="label-item-carou">The Shinning</p>
+                        <p>256.000 đ</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div>
+                <ul class="flex-item-carousel">
+                    <li class="li-item">
+                        <img src="~/ImgProducts/theshining.jpg" alt="Los Angeles" class="d-block">
+                        <p class="label-item-carou">The Shinning</p>
+                        <p>256.000 đ</p>
+                    </li>
+                    <li class="li-item">
+                        <img src="~/ImgProducts/theshining.jpg" alt="Los Angeles" class="d-block">
+                        <p class="label-item-carou">The Shinning</p>
+                        <p>256.000 đ</p>
+                    </li>
+                    <li class="li-item">
+                        <img src="~/ImgProducts/sungvitrungthep.jpg" alt="Los Angeles" class="d-block">
+                        <p class="label-item-carou">The Shinning</p>
+                        <p>256.000 đ</p>
+                    </li>
+                    <li class="li-item">
+                        <img src="~/ImgProducts/theshining.jpg" alt="Los Angeles" class="d-block">
+                        <p class="label-item-carou">The Shinning</p>
+                        <p>256.000 đ</p>
+                    </li>
+                    <li class="li-item">
+                        <img src="~/ImgProducts/sungvitrungthep.jpg" alt="Los Angeles" class="d-block">
+                        <p class="label-item-carou">The Shinning</p>
+                        <p>256.000 đ</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div>
+                <ul class="flex-item-carousel">
+                    <li class="li-item">
+                        <img src="~/ImgProducts/theshining.jpg" alt="Los Angeles" class="d-block">
+                        <p class="label-item-carou">The Shinning</p>
+                        <p>256.000 đ</p>
+                    </li>
+                    <li class="li-item">
+                        <img src="~/ImgProducts/theshining.jpg" alt="Los Angeles" class="d-block">
+                        <p class="label-item-carou">The Shinning</p>
+                        <p>256.000 đ</p>
+                    </li>
+                    <li class="li-item">
+                        <img src="~/ImgProducts/sungvitrungthep.jpg" alt="Los Angeles" class="d-block">
+                        <p class="label-item-carou">The Shinning</p>
+                        <p>256.000 đ</p>
+                    </li>
+                    <li class="li-item">
+                        <img src="~/ImgProducts/theshining.jpg" alt="Los Angeles" class="d-block">
+                        <p class="label-item-carou">The Shinning</p>
+                        <p>256.000 đ</p>
+                    </li>
+                    <li class="li-item">
+                        <img src="~/ImgProducts/sungvitrungthep.jpg" alt="Los Angeles" class="d-block">
+                        <p class="label-item-carou">The Shinning</p>
+                        <p>256.000 đ</p>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Left and right controls/icons -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+
+
+
+
+

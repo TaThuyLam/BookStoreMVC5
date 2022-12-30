@@ -1,0 +1,224 @@
+﻿@model List<WebsiteBanSach.Models.DonHang>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<head>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            margin-bottom: 15px;
+        }
+
+        .grid-item {
+            margin: 20px;
+            padding: 10px;
+            background-color: lavender;
+        }
+
+        .grid-item-div {
+            margin: 20px;
+        }
+
+        .span2 {
+            grid-column-start: 2;
+            grid-column-end: 4;
+        }
+        .span3 {
+            grid-column-start: 1;
+            grid-column-end: 4;
+            display:inline;
+        }
+        .lable {
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .number_item {
+            padding-top: 15px;
+            text-align: center;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+        }
+        #DateFrom,#DateTo{
+            width:300px;
+            margin-right:20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="grid">
+        <div class="grid-item-div span3">
+            @using (Html.BeginForm("Report", "Report", FormMethod.Get))
+            {
+                <div>
+                    <input style="display:inline" type="date" id="DateFrom" name="from" class="form-control" value="@ViewBag.DateFrom.Date.ToString("yyyy-MM-dd")">
+                    <input style="display:inline" type="date" id="DateTo" name="to" class="form-control" value="@ViewBag.DateTo.Date.ToString("yyyy-MM-dd")">
+                    <button style="display:inline" type="button" class="btn btn-success" onclick="this.form.submit()">Get</button>
+                </div>
+                
+            }
+
+
+        </div>
+        <div class="grid-item">
+            <p class="lable">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-basket-fill" viewBox="0 0 16 16">
+                    <path d="M5.071 1.243a.5.5 0 0 1 .858.514L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 6h1.717L5.07 1.243zM3.5 10.5a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3z" />
+                </svg>  TOTAL SALES
+            </p>
+            <h1 id="item_totalsales" class="number_item" style="color:darkblue">0 VND </h1>
+            <h4 class="number_item" style="color:green">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                    <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                </svg> 0% / Period
+            </h4>
+        </div>
+        <div class="grid-item">
+            <p class="lable">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-bag-check-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zm-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z" />
+                </svg> TOTAL ORDERS
+            </p>
+            <h1 id="item_totalorders" class="number_item" style="color:darkblue">0 </h1>
+            <h4 class="number_item" style="color:green">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                    <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                </svg> 0% / Period
+            </h4>
+        </div>
+        <div class="grid-item">
+            <p class="lable">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-bag-x-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM6.854 8.146a.5.5 0 1 0-.708.708L7.293 10l-1.147 1.146a.5.5 0 0 0 .708.708L8 10.707l1.146 1.147a.5.5 0 0 0 .708-.708L8.707 10l1.147-1.146a.5.5 0 0 0-.708-.708L8 9.293 6.854 8.146z" />
+                </svg> TOTAL CANCELED ORDERS
+            </p>
+            <h1 id="item_totalcancels" class="number_item" style="color:darkblue">0 </h1>
+            <h4 class="number_item" style="color:red">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                </svg>0% / Period
+            </h4>
+        </div>
+        <div class="grid-item">
+            <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
+        </div>
+        <div class="grid-item span2">
+            <canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
+        </div>
+    </div>
+
+
+
+
+    <script>
+
+      
+       // Biểu đồ tròn
+                var totalsale = document.getElementById("item_totalsales");
+
+               @{
+                   double s = 0;
+                   int cancel_count=0;
+                   int success_count = 0;
+                   int wait_count = 0;
+                   foreach (var item in Model)
+                   {
+                       var a = item.NgayDat.Value;
+                         {
+                              s = s + item.TongTien.Value;
+                              if (item.TinhTrangGiaoHang == -2)
+                              {
+                                  cancel_count++;
+                              }
+                              else if (item.TinhTrangGiaoHang == 1)
+                              {
+                                  success_count++;
+                              }
+                              else
+                              {
+                                  wait_count++;
+                              }
+                          }
+
+                      }
+       }
+        document.getElementById("item_totalsales").innerHTML = @s+"VND";
+        document.getElementById("item_totalorders").innerHTML = @Model.Count;
+        document.getElementById("item_totalcancels").innerHTML = @cancel_count +"";
+          var xValues = ["Success", "Cancel", "Wait"];
+            var yValues = [@success_count, @cancel_count, @wait_count];
+            var barColors = ["green", "red", "yellow"];
+
+            new Chart("myChart", {
+                type: "pie",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: "Total sale"
+                    }
+                }
+            });
+        // Biểu đồ cột
+            var xvalue = [];
+            var yvalue = [];
+            var barColor = [];
+          @foreach(var item in Model)
+          {
+              if(item.TinhTrangGiaoHang==3)
+              {
+                  var date = new DateTime(item.NgayGiao.Value.Ticks);
+                  @:if (xvalue.indexOf(@date.Day + '/' + @date.Month + '/' + @date.Year) >= 0)
+                    {
+                        @:yvalue[xvalue.indexOf(@date.Day + '/' + @date.Month + '/' + @date.Year)]+=@item.DaThanhToan;
+                    }
+                  @:else
+                    {
+                         @:xvalue.push(@date.Day + '/' + @date.Month + '/' + @date.Year);
+                         @:yvalue.push(@item.DaThanhToan);
+                         @:barColor.push("blue");
+                     }
+              }
+
+          }
+            new Chart("myChart2", {
+                type: "bar",
+                data: {
+                    labels: xvalue,
+                    datasets: [{
+                        backgroundColor: barColor,
+                        data: yvalue
+                    }]
+                },
+                options: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: "Report Sales"
+                    }
+                }
+            });
+
+
+
+
+
+
+
+
+
+    </script>
+
+</body>

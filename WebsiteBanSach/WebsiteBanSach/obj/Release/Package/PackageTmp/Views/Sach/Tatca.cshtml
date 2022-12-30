@@ -1,0 +1,265 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.PagedList<WebsiteBanSach.Models.Sach>
+
+@{
+    ViewBag.Title = "Tatca";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+<style>
+    .product_section .box .img-box {
+        background-color: white;
+        /*height:fit-content;*/
+        height: 225px;
+    }
+
+    .row {
+        /*width:90%;
+        margin-left:100px;*/
+        /* background-color:white;*/
+    }
+
+    .product_info {
+        justify-content: center;
+    }
+
+    #item-product {
+        /*border: 1px solid #00000021;*/
+        padding: 0px;
+        height: 320px;
+    }
+
+    .label-tenSach {
+        height: 50px;
+        font-weight: bold;
+        margin: 5px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-areas:
+            'header header header header header header'
+            'menu menu main main main main'
+            'footer footer footer footer footer footer ';
+        gap: 10px;
+        margin-top: 20px;
+        /*background-color: #e7e7e790;*/
+        padding: 10px;
+    }
+
+    .img-box {
+        padding-bottom: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .item1 {
+        grid-area: header;
+        margin-left: 60px;
+        margin-right: 60px;
+    }
+
+    .item2 {
+        grid-area: menu;
+        width: 190px;
+        margin-left: 60px;
+        /*margin-right: 60px;*/
+    }
+
+    .item3 {
+        grid-area: main;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-areas:
+            'menu menu header header header header'
+            'menu menu main main main main'
+            'main menu footer main main main';
+        gap: 10px;
+        /*margin-top: 20px;*/
+        /*background-color: #e7e7e790;*/
+        padding: 10px;
+    }
+
+        .grid-container > div {
+            background-color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            padding: 20px 0;
+            font-size: 18px;
+        }
+
+    #filter {
+        width: 255px;
+        border-right: 1px solid #3a446836;
+    }
+
+    .item1 {
+        grid-area: header;
+        margin-left: 60px;
+        margin-right: 60px;
+    }
+
+    #item-main {
+        padding-top: 0px;
+        width: 1148px;
+        /*border: 1px solid #3a446836;*/
+    }
+
+    #main {
+        background-color: white;
+    }
+
+    .label-cate {
+        font-size: 22px;
+        font-weight: bold;
+        text-align: start;
+        margin-left: 0px;
+        margin-bottom: 5px;
+    }
+
+    #item-Sach:hover {
+        box-shadow: 10px 1px 30px 1px #e8e8e8;
+        transition: transform .5s;
+        /*border: 1px solid black;*/
+    }
+
+    .menuTrang {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+        .menuTrang li {
+            display: inline;
+            border: 1px solid #f3c93e;
+            border-radius: 8px;
+            width: 40px;
+            text-align: center;
+            color: white;
+            margin-left: 0.8%
+        }
+
+    #filter {
+        width: 255px;
+        border-right: 1px solid #3a446836;
+    }
+
+    .item2 {
+        grid-area: menu;
+        width: 190px;
+        margin-left: 60px;
+        /*margin-right: 60px;*/
+    }
+
+    li.active {
+        color: white;
+        background-color: #f3c93e
+    }
+
+    .item5 {
+        grid-area: footer;
+    }
+
+    ul.pagination {
+        justify-content: center;
+    }
+
+    .layout_padding {
+        padding: 0px;
+    }
+
+    label-head {
+        font-size: 25px;
+        margin: 0px;
+        background-color: white;
+        width: fit-content;
+    }
+    section#section {
+        /*width:fit-content;*/
+        height:fit-content;
+    }
+</style>
+<div class="body_1" style="padding:0px">
+    <section>
+        <div class="grid-container" style="margin:0px">
+            <div class="heading_container heading_center">
+
+            </div>            
+            <div class="body_1">
+                <div class="grid-container">
+                    <div class="item1" style="padding:0px; background-color:none">
+                        <p class="label-head" style="font-size:25px; width:fit-content; margin:0px; margin-left:290px; font-weight:bold">
+                            TẤT CẢ SÁCH
+                        </p>
+                    </div>
+                    <div class="item2" id="filter">
+                        <p class="label-cate">THỂ LOẠI</p>
+                        <div style="width: 90%; border-top: 1px solid #3a4468ad ">
+                            <p>@Html.Action("Filter_CD", "ChuDe")</p>
+                        </div>
+                        <p class="label-cate">NHÀ XUẤT BẢN</p>
+                        <div style="width: 90%; border-top: 1px solid #3a4468ad ">
+                            <p>@Html.Action("Filter_NXB", "NhaXuatBan")</p>
+                        </div>
+                    </div>
+                    <div class="item3" id="item-main">
+                        <section class="product_section layout_padding" style="padding:0px;">
+                            <div class="container">
+                                <div class="row" id="main">
+                                    @{
+                                        foreach (var item in Model)
+                                        {
+                                            <div class="col-sm-4 col-lg-3">
+                                                <div class="box" id="item-Sach">
+                                                    <div class="img-box">
+                                                        <img src="@Url.Content("~/ImgProducts/" + item.AnhBia)" alt="">
+                                                        @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMaSach = item.MaSach, @strUrl = Request.Url.ToString() }))
+                                                        {
+                                                            <span>
+                                                                <input class="add_cart_btn" type="submit" value="Thêm vào giỏ hàng" style="border:none;background-color:none" />
+                                                            </span>
+                                                        }
+                                                    </div>
+                                                    <div class="detail-box" style="padding:0px; background-color:white">
+                                                        <a href="@Url.Action("XemChiTiet","Sach", new {@masach = item.MaSach })" style="color:black; text-align:center">
+                                                            <p class="label-tenSach">
+                                                                @item.TenSach
+                                                            </p>
+                                                        </a>
+                                                        <div class="product_info" style="display:flex; justify-content:center">
+                                                            <h5>
+                                                                @string.Format("{0:0,0}", @item.GiaBan)<span><u>đ</u></span>
+                                                            </h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="item5">
+                        @*Tao link lien ket caca trang *@
+                        <p style="text-align:center">
+                            <b>Trang</b>
+                            @(Model.PageCount<Model.PageNumber?0:Model.PageNumber) / @Model.PageCount
+                        </p>
+                        <div class="row">
+                            <div class="menuTrang">
+                                @Html.PagedListPager(Model, page => Url.Action("TatCa", "Sach", new { page = page }))
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+

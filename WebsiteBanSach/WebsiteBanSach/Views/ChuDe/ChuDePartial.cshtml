@@ -1,0 +1,46 @@
+﻿@using WebsiteBanSach.Models;
+@model List<ChuDe>
+
+<style>
+    .item-cd{
+        color:black;
+        width:100px;
+    }
+    #section {
+        height: 150px;
+        margin-bottom: 4%;
+        width: 440px;
+    }
+/*    .dropdown-item:active{
+        background-color:white;
+    }*/
+</style>
+<section id="section">
+    <div>                 
+         <div style="display:flex; flex-wrap:wrap; line-height:30px">
+            @{
+                    int i = 0;
+                    int y = 0;
+                    foreach (var item in Model)
+                    {
+                        @ViewBag.ChuDe;
+                    <span style="width:220px">
+                        <a href="@Url.Action("SachTheoChuDe", new { @machude = item.MaChuDe })" class="dropdown-item" @*style="width:200px; height:50px; padding-top:1%; background-color: forestgreen"*@>@item.TenChuDe</a>
+                    </span>
+                    i += 1;
+                    y += 1;
+                    if (i == 4)
+                    {
+                       <br />
+                        }
+                        if (y == 8)
+                        {                            
+                            break;
+                        }
+                    }
+                }
+         </div>
+    </div>
+</section>
+
+

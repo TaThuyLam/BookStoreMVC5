@@ -1,0 +1,143 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.PagedList<WebsiteBanSach.Models.Sach>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+<style>
+    .menuTrang {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+        .menuTrang li {
+            display: inline;
+            border: 1px solid black;
+            border-radius: 8px;
+            width: 40px;
+            text-align: center;
+            color: white;
+            margin-left: 0.8%
+        }
+    li.active{
+        color:white;
+        background-color:darkseagreen
+    }
+    tr{
+        justify-self:center;
+        text-align:center
+    }
+    col{
+        border:2px solid black;
+    }
+    .grid {
+        display: grid;
+        grid-template-columns: auto auto;
+        margin-bottom: 15px;
+    }
+
+    .grid-item {
+        padding-right: 20px;
+    }
+
+
+</style>
+
+
+<h2 style="text-align:center">MANAGE PRODUCTS</h2>
+<h2></h2>
+<div class="grid">
+    <div class="grid-item">
+        <form class="app-search-form" action="/QuanLySanPham/KetQuaTimKiemAd" method="post" style="width:auto">
+            <input type="text" placeholder="Tìm kiếm..." id="txtTimKiemAd" name="txtTimKiemAd" class="form-control search-input">
+            <button style="margin-top:5px;margin-bottom:5px" type="submit" class="btn search-btn btn-primary" value="Search"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+    <div class="grid-item">
+        <button type="button" class="btn btn-success" style="color:white;float:right"> <i class="fa-solid fa-plus" style="margin-right:5px"></i>Add Product</button>
+    </div>
+</div>
+<table class="table table-sm table-striped">
+    <colgroup>
+        <col width="40" span="1">
+        <col width="150" span="1">
+        <col width=0 span="1">
+        <col width="200" span="1">
+        <col width=0 span="2">
+        <col width=20 span="1">
+        <col width=80 span="1">
+    </colgroup>
+    <tr class="table-secondary table-bordered">
+        <th>
+            ID
+        </th>
+        <th>
+           Name
+        </th>
+        <th>
+           Price
+        </th>
+        <th>
+           Date Update
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Publisher
+        </th>
+        <th>
+            Category
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td style="text-align:center">
+
+                @Html.DisplayFor(modelItem => item.MaSach)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSach)
+            </td>
+            <td>
+                @string.Format("{0:0,0}", @item.GiaBan)<span><u>đ</u></span>
+            </td>
+          
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayCapNhap)
+            </td>
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.SoLuongTon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NhaXuatBan.TenNXB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChuDe.TenChuDe)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "ChinhSua", new { @MaSach = item.MaSach }) |
+                @Html.ActionLink("Delete", "Xoa", new { @MaSach = item.MaSach })
+            </td>
+        </tr>
+    }
+
+
+</table>
+@*Tao link lien ket caca trang *@
+<center>
+    <p><b>Trang</b> @(Model.PageCount<Model.PageNumber?0:Model.PageNumber) / @Model.PageCount</p>
+    <div class="menuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+    </div>
+</center>
+

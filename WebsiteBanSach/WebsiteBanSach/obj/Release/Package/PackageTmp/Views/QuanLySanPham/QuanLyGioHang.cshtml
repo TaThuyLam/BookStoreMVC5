@@ -1,0 +1,209 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.PagedList<WebsiteBanSach.Models.DonHang>
+
+@{
+    ViewBag.Title = "QuanLyGioHang";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+<head>
+
+
+    <style>
+        .menuTrang {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+            .menuTrang li {
+                display: inline;
+                border: 1px solid black;
+                border-radius: 8px;
+                width: 40px;
+                text-align: center;
+                color: white;
+                margin-left: 0.8%
+            }
+
+        li.active {
+            color: white;
+            background-color: bisque
+        }
+
+        tr {
+            text-align: center
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            margin-bottom:15px;
+        }
+
+        .grid-item {
+            padding-right: 20px;
+        }
+
+        .nut_dropdown {
+            border: 1px solid lightgrey ;
+            width:auto;
+        }
+
+        .nut_dropdown {
+            border: 1px solid lightgrey;
+            width: auto;
+        }
+        /* Thiết lập vị trí cho thẻ div với class dropdown*/
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Nội dung Dropdown */
+        .noidung_dropdown {
+            /*Ẩn nội dụng các đường dẫn*/
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            /* Thiết kế style cho các đường dẫn tronng Dropdown */
+            .noidung_dropdown a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+                
+            }
+
+        .hienThi {
+            display: block;
+        }
+    </style>
+</head>
+<h2 style="text-align:center;padding-bottom:2%">Quản Lý Đơn Hàng</h2>
+<div class="grid">
+    <div class="grid-item">
+        <form class="app-search-form" action="/QuanLySanPham/KetQuaTimKiemAd" method="post" style="width:auto">
+            <input type="text" placeholder="Tìm kiếm..." id="txtTimKiemAd" name="txtTimKiemAd" class="form-control search-input">
+            <button style="margin-top:5px;margin-bottom:5px" type="submit" class="btn search-btn btn-primary" value="Search"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+    <div class="grid-item">
+        Trạng thái giao hàng   
+        <div class="dropdown" onclick="hamDropdown()">
+            <button class=" btn nut_dropdown dropdown-toggle" >@ViewBag.Loc</button>
+            <div class="noidung_dropdown">
+                <a href="@Url.Action("QuanLyGioHang","QuanLySanPham",new { @tt=-1})">Tất cả</a>
+                <a href="@Url.Action("QuanLyGioHang","QuanLySanPham",new { @tt=0})">Đang giao</a>
+                <a href="@Url.Action("QuanLyGioHang","QuanLySanPham",new { @tt=1})">Đã giao</a>
+            </div>
+        </div>
+    </div>
+    <div class="grid-item">
+        <button type="button" class="btn btn-success" style="color:white"> <i class="fa-solid fa-plus" style="margin-right:5px"></i>Thêm đơn hàng</button>
+    </div>
+</div>
+
+
+<table class="table table-sm table-striped">
+    <colgroup>
+        <col width="40" span="1">
+        <col width="100" span="1">
+        <col width=80 span="1">
+        <col width="120" span="2">
+        <col width=80 span="1">
+        <col width=60 span="1">
+
+    </colgroup>
+    <tr class="table-secondary table-bordered">
+        <th>
+            Mã Đơn Hàng
+        </th>
+        <th>
+            Đã Thanh Toán
+        </th>
+        <th>
+            Tình Trạng Giao Hàng
+        </th>
+        <th>
+            Ngày Đặt
+        </th>
+        <th>
+            Ngày Giao
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().KhachHang.HoTen)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaDonHang)
+            </td>
+            <td>
+                @if (item.DaThanhToan == 1)
+                {
+                    <p>Yes</p>
+                }
+                else
+                {
+                    <p>No</p>
+                }
+            </td>
+            <td>
+                @if (item.NgayGiao != null)
+                {
+                    <p>Đã Giao</p>
+                }
+                else
+                {
+                    <p>Đang Giao</p>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayDat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayGiao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KhachHang.HoTen)
+            </td>
+            <td>
+                @Html.ActionLink("Chỉnh Sửa", "ChinhSuaDonHang", new { @MaDonHang = item.MaDonHang }) |
+                @Html.ActionLink("Chi Tiết", "XemChiTiet", new { @MaDonHang = item.MaDonHang }) |
+                @Html.ActionLink("Xóa", "XoaDonHang", new { @MaDonHang = item.MaDonHang })
+            </td>
+        </tr>
+    }
+
+</table>
+@*Tao link lien ket caca trang *@
+<center>
+    <p><b>Trang</b> @(Model.PageCount<Model.PageNumber?0:Model.PageNumber) / @Model.PageCount</p>
+    <div class="menuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("QuanLyGioHang", new { page = page }))
+    </div>
+</center>
+<script>
+    function hamDropdown() {
+        document.querySelector(".noidung_dropdown").classList.toggle("hienThi");
+    }
+    window.onclick = function (e) {
+        if (!e.target.matches('.nut_dropdown')) {
+            var noiDungDropdown = document.querySelector(".noidung_dropdown");
+            if (noiDungDropdown.classList.contains('hienThi')) {
+                noiDungDropdown.classList.remove('hienThi');
+            }
+        }
+    }
+</script>

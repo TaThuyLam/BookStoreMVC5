@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Demo";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<div id="example">
+    @(Html.Kendo().Dialog()
+        .Name("dialog")
+        .Title("Software Update")
+        .Content("<p>A new version of <strong>Kendo UI</strong> is available. Would you like to download and install it now?<p>")
+        .Width(400)
+        .Modal(false)
+        .Actions(actions =>
+        {
+            actions.Add().Text("Skip this version");
+            actions.Add().Text("Remind me later");
+            actions.Add().Text("Install update").Primary(true);
+        })
+        .Events(ev => ev.Close("onClose").Open("onOpen"))
+    )
+    @(Html.Kendo().Button()
+        .Name("showDialogBtn")
+        .HtmlAttributes(new { style = "display:none;", @class = "hide-on-narrow" })
+        .Content("Open Dialog")
+        .Events(ev => ev.Click("showDialog"))
+    )
+</div>
+
+<script>
+    function onClose() {
+        $("#showDialogBtn").fadeIn();
+    }
+
+    function onOpen() {
+        $("#showDialogBtn").fadeOut();
+    }
+
+    function showDialog() {
+        $('#dialog').data("kendoDialog").open();
+    }
+</script>
+
+<style>
+    #example {
+        min-height: 350px;
+    }
+</style>

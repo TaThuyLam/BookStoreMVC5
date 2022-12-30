@@ -1,0 +1,409 @@
+﻿@using WebsiteBanSach.Models
+@model DonHang
+
+
+@{
+    ViewBag.Title = "ThanhToan";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+<head>
+    <style>
+        body {
+        }
+
+        .nav_form {
+            display: grid;
+            grid-template-columns: 60% 40%;
+            margin-left: 30px;
+            margin-right: 30px;
+            border: 1px solid black;
+            margin: 50px;
+        }
+
+        .form {
+            background-color: white;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid black;
+            margin: 10px;
+            height: auto;
+        }
+
+        .grid {
+            background-color: white;
+            display: grid;
+            grid-template-columns: auto auto;
+            margin-bottom: 20px
+        }
+
+        .grid-item {
+            height: 70px;
+            margin: 10px;
+        }
+
+        .lable {
+            font-size: 15px;
+            color: dimgrey;
+            margin: 0
+        }
+
+        .text {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0
+        }
+
+        input {
+            border: 0 solid;
+            background-color: white;
+        }
+
+        .btn_delete {
+            display: none;
+        }
+
+        .btn-danger, .btn-info, .btn-success {
+            width: 200px;
+            margin: 10px;
+            color: white;
+            box-shadow: inherit;
+        }
+
+        .btn_action {
+            height: 50px;
+            text-align: right;
+        }
+
+        .btn_reset, .btn_save {
+            width: 100px;
+            color: white;
+            margin: 10px;
+            display: none;
+        }
+
+        .btn_reset {
+            background-color: red;
+        }
+
+        .btn_save {
+            background-color: blue;
+        }
+
+        .tensach {
+            font-weight: bold;
+            font-size: 20px;
+            color: darkblue;
+        }
+
+        .grid_thanhtoan {
+            background-color: white;
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            margin-bottom: 20px
+        }
+
+        .grid_thanhtoan_item {
+            height: auto;
+            width: 180px;
+            margin: 5px;
+            border: 1px solid black;
+            text-align: center;
+            padding: 10px;
+        }
+
+            .grid_thanhtoan_item:hover {
+                box-shadow: 2px 2px green;
+            }
+
+        .item_thanhtoan1 {
+            color: green;
+            font-size: 12px;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .item_thanhtoan2 {
+            color: grey;
+            font-size: 12px;
+            margin: 0;
+        }
+
+        #errordiachi, #errortenKH, #errorsdt {
+            display: none;
+            color: red;
+            float: right
+        }
+    </style>
+</head>
+@{List<GioHang> gioHangs = (List<GioHang>)Session["GioHang"];
+    if (gioHangs == null)
+    {
+        gioHangs = new List<GioHang>();
+    }
+}
+@using (Html.BeginForm("DatHang", "GioHang"))
+{
+    @Html.AntiForgeryToken()
+    <body onload="load()">
+        <div class="nav_form">
+            <div class="form">
+                <h5 class="text">
+                    Thông tin khách hàng
+                </h5>
+                <hr />
+                <div class="grid">
+                    <div class="grid-item">
+                        <span class="text">Họ và tên:</span>
+                        <span id='errortenKH'>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                            </svg>
+                        </span>
+                        <p class="lable">
+                            @Html.EditorFor(model => model.TenKH, new { htmlAttributes = new { @class = "form-control", @id = "tenKH" } })
+                            @Html.ValidationMessageFor(model => model.TenKH, "", new { @class = "text-danger" })
+
+                        </p>
+
+                    </div>
+
+                    <div class="grid-item">
+                        <span class="text">Số điện thoại:</span>
+                        <span id='errorsdt'>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                            </svg>
+                        </span>
+                        <p class="lable">
+                            @Html.EditorFor(model => model.SoDienThoai, new { htmlAttributes = new { @class = "form-control", @id = "sodienthoai" } })
+                            @Html.ValidationMessageFor(model => model.SoDienThoai, "", new { @class = "text-danger" })
+                        </p>
+                    </div>
+                    <div class="grid-item" style=" grid-column-start: 1; grid-column-end: 3;">
+                        <p class="text">Địa chỉ:</p>
+                        <span id='errordiachi'>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                            </svg>
+                        </span>
+                        <p class="lable">
+                            @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control", @id = "diachi" } })
+                            @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                        </p>
+                        <p id="errordiachi"></p>
+                    </div>
+                </div>
+                <h5 class="text">
+                    Hình thức thanh toán
+                </h5>
+                <hr />
+                <div class="grid_thanhtoan">
+                    <div class="grid_thanhtoan_item" id="tt_tienmat" onclick="ChonHTThanhToan(0)">
+                        <img src="@Url.Content("~/Img/ship.jpg")" height="80" />
+                        <p class="item_thanhtoan1">THANH TOÁN TIỀN MẶT</p>
+                        <p class="item_thanhtoan2">Thanh toán khi giao hàng</p>
+                    </div>
+                    <div class="grid_thanhtoan_item" id="tt_momo" onclick="ChonHTThanhToan(1)">
+                        <img src="@Url.Content("~/Img/momo.png")" height="80" />
+                        <p class="item_thanhtoan1">THANH TOÁN QUA MOMO</p>
+                        <p class="item_thanhtoan2">Thanh toán khi giao hàng</p>
+                    </div>
+                    <div class="grid_thanhtoan_item" id="tt_zalo" onclick="ChonHTThanhToan(2)">
+                        <img src="@Url.Content("~/Img/zalopay.png")" height="80" />
+                        <p class="item_thanhtoan1">THANH TOÁN QUA ZALOPAY</p>
+                        <p class="item_thanhtoan2">Thanh toán khi giao hàng</p>
+                    </div>
+                    <div class="grid_thanhtoan_item" id="tt_shoppee" onclick="ChonHTThanhToan(3)">
+                        <img src="@Url.Content("~/Img/shoppeepay.png")" height="80" />
+                        <p class="item_thanhtoan1">THANH TOÁN QUA SHOPPEEPAY</p>
+                        <p class="item_thanhtoan2">Thanh toán khi giao hàng</p>
+                    </div>
+                </div>
+                <textarea placeholder="Ghi chú đơn hàng..." style="width:100%;height:100px"></textarea>
+
+
+            </div>
+
+            <div class="form">
+                <h5 class="text">
+                    Chi tiết đơn hàng
+                </h5>
+
+
+                <hr />
+                <div class="container mt-3">
+                    <table style="width:100%" id="table">
+                        @{
+                            int tongsanpham = 0;
+                            double tongtien = 0;
+                            double phi = 10000;
+                            double tongcong = 0;
+                        }
+
+                        @foreach (var item in gioHangs)
+                        {
+                            tongsanpham = tongsanpham + item.iSoLuong;
+                            tongtien = tongtien + item.ThanhTien;
+                            <tr>
+
+                                <td width="60px">
+                                    <img src="@Url.Content("~/ImgProducts/" + item.sAnhBia)" height="70" />
+
+                                </td>
+                                <td colspan="2">
+                                    <p class="tensach">@item.sTenSach</p>
+                                    <p> @item.iSoLuong x @string.Format("{0:0,0}", @item.dDonGia) đ</p>
+                                </td>
+                            </tr>
+
+                        }
+                        <tr>
+
+                            <td colspan="2">
+                                @tongsanpham sản phẩm
+                            </td>
+                            <td style="text-align:right;font-weight:bold" id="tongtiensp">
+                                @tongtien đ
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td colspan="2">
+                                Phí vận chuyển
+                            </td>
+                            <td style="text-align:right;font-weight:bold" id="phivanchuyen">
+                                10000 đ
+                            </td>
+                        </tr>
+                        <tr id="giamgia" style="display:none">
+
+                            <td colspan="2">
+                                Giảm giá
+                            </td>
+                            <td style="text-align:right;font-weight:bold" id="tienGiam">
+                              
+                            </td>
+                        </tr>
+                        <tr id="col_Voucher">
+                            <td colspan="4">
+                                <div class="input-group mb-3">
+                                    <input id="maGiam" type="text" class="form-control" placeholder="Nhập mã giảm giá" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                    <span class="input-group-text" style="background-color:orange" id="basic-addon2" onclick="ApDungVoucher()">Áp dụng</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td colspan="2" style="font-weight:bold">
+                                TỔNG CỘNG
+                            </td>
+                            @{tongcong = tongtien + phi;
+                            }
+                            <td style="text-align:right;font-weight:bold" id="TongTien">
+                                @tongcong đ
+                            </td>
+
+
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="text-align:right">
+                                <button type="button" class="btn btn-success" id="btn_xacnhan" onclick="kiemtra()" onsubmit="this.form.submit()">Xác nhận mua hàng</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+    </body>
+
+}
+<script>
+    var pt_ThanhToan = -1;
+   @* var tt_tienmat = document.getElementsByClassName("grid_thanhtoan_item")[0];
+    var tt_momo = document.getElementsByClassName("grid_thanhtoan_item")[1];
+    var tt_zalopay = document.getElementsByClassName("grid_thanhtoan_item")[2];
+    var tt_shoppeepay = document.getElementsByClassName("grid_thanhtoan_item")[3];*@
+    @if(Model==null)
+            {
+                @:document.getElementById('col_Voucher').style.display = 'none';
+            }
+    function ChonHTThanhToan(number) {
+        for (var i = 0; i < 4; i++) {
+            if (i == number) {
+                document.getElementsByClassName("grid_thanhtoan_item")[i].style = 'box-shadow: 2px 2px green;';
+                pt_ThanhToan = i;
+            }
+            else {
+                document.getElementsByClassName("grid_thanhtoan_item")[i].style = 'box-shadow:0px';
+            }
+        }
+
+    }
+    function kiemtra() {
+        var tenKH = document.getElementById("tenKH");
+        var sodienthoai = document.getElementById("sodienthoai");
+        var diachi = document.getElementById("diachi");
+        var errortenKH = document.getElementById('errortenKH');
+        var errorsdt = document.getElementById('errorsdt');
+        var errordiachi = document.getElementById('errordiachi');
+        var kiemtra = true;
+        var s=''
+        if (tenKH.value == "") {
+            errortenKH.style.display = 'inline';
+            tenKH.style.borderColor = 'red';
+            kiemtra = false;
+        }
+        else {
+            errortenKH.style.display = 'none';
+            tenKH.style.borderColor = '';
+
+        }
+        if (sodienthoai.value == "") {
+            errorsdt.style.display = 'inline';
+            sodienthoai.style.borderColor = 'red';
+            kiemtra = false;
+        }
+        else {
+            errorsdt.style.display = 'none';
+            sodienthoai.style.borderColor = '';
+
+        }
+        if (diachi.value == "") {
+            errordiachi.style.display = 'inline';
+            diachi.style.borderColor = 'red';
+            kiemtra = false;
+        }
+        else {
+            errordiachi.style.display = 'none';
+            diachi.style.borderColor = '';
+
+        }
+        if (pt_ThanhToan == -1)
+        {
+            alert('Vui lòng chọn phương thức thanh toán!!!');
+            kiemtra = false;
+        }
+
+        if (kiemtra == true) {
+            document.getElementById("btn_xacnhan").onsubmit();
+        }
+    }
+    function ApDungVoucher() {
+        var maGiam = document.getElementsById('maGiam').value;
+
+        if (maGiam == '') {
+            alert('Mời nhập mã giảm giá!!!');
+        }
+        else {
+            document.getElementById('giamgia').style = "display:inline";
+
+        }
+    }
+
+</script>
+

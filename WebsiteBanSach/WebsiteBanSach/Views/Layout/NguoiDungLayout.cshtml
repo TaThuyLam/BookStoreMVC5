@@ -1,0 +1,381 @@
+﻿@*@model IEnumerable<WebsiteBanSach.Models.ChuDe>*@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/NguoiDungCssLayout/NguoiDungCssLayout.css" rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="~/Content/NguoiDungCssLayout/responsive.css" rel="stylesheet" />
+    @* link nivo slider*@
+
+    <link href="~/Content/NivoSlider/nivo-slider.css" rel="stylesheet" />
+    <link href="~/Content/NivoSlider/CssNivoSlider/Light/light.css" rel="stylesheet" />
+    <script src="~/Content/NivoSlider/jquery.min.js"></script>
+    <script src="~/Content/NivoSlider/jquery.nivo.slider.pack.js"></script>
+
+
+
+    <style>
+        :root {
+            --colorOrange: #F3c93e;
+            --backgr: #3a4468;
+        }
+
+        .header_top {
+            height: 40px;
+            margin-top: -18px;
+        }
+
+        .top_nav_container {
+            width: 98%;
+            margin-left: 40px;
+        }
+
+        .a-dv:hover {
+            color: #F3c93e;
+        }
+
+        .row {
+            justify-content: space-evenly;
+        }
+
+        .contact_nav {
+            padding-left: 20px
+        }
+
+        .container-fluid {
+            padding-left: 0px;
+            margin-top: 3px;
+            padding-right: 0px
+        }
+
+        .dropdown-menu.show {
+            margin-top: 10px;
+            margin-left: 22px;
+            display: flex;
+            height: fit-content;
+            padding: 0px;
+        }
+
+        .dropdown-item {
+            font-size: 15px;
+        }
+
+            .dropdown-item:hover {
+                color: var(--colorOrange)
+            }
+
+        .navbar .nav-item .dropdown-menu {
+            display: none;
+        }
+
+        .navbar .nav-item:hover .nav-link {
+        }
+
+        .navbar .nav-item:hover .dropdown-menu {
+            display: block;
+            padding-top: 10px;
+            position: absolute
+        }
+
+        .navbar .nav-item .dropdown-menu {
+            margin-top: 0;
+        }
+
+        .a-allBook {
+            color: black;
+        }
+
+        .li-a-Book {
+            background-color: lightgrey;
+            margin-top: -20px;
+            width: 100px;
+            height: 30px;
+            margin-left: 240px;
+            border-radius: 5px;
+            padding-top: 2px;
+        }
+
+            .li-a-Book:hover {
+                background-color: var(--backgr);
+                color: white;
+            }
+
+        body {
+            position: relative;
+        }
+
+        .alert {
+            padding: 20px;
+            position: fixed;
+            color: white;
+            border-radius: 10px;
+            width: 300px;
+            top: 20%;
+            right: 5%;
+            z-index: 2;
+            display: none;
+            box-shadow: 10px 10px 5px grey;
+        }
+
+        .alert-unsuccess {
+            background-color: red;
+        }
+
+        .alert-success {
+            background-color: green;
+            border: 1px solid green;
+        }
+    </style>
+
+</head>
+<body>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href=@Url.Action("~/favicon.ico") sizes="22x22" />
+    <div>
+        <div class="main-layout">
+            <div class="header_top">
+                <div class="container-fluid">
+                    <div class="top_nav_container">
+                        <div class="contact_nav">
+                            <a href="@Url.Action("Index", "Home")" style="color:var(--colorOrange)">
+
+                                <span class="nav-icon">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-book fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="width:40px; height:40px">
+                                        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z" />
+                                    </svg>
+                                </span>
+                                <span class="logo-text">BOOK<b style="font-size:12px">Plus</b></span>
+
+                            </a>
+                        </div>
+
+
+                        <div class="header_bottom">
+
+                            <div class="container-fluid">
+                                <nav class="navbar navbar-expand-lg custom_nav-container" style="width:1245px">
+                                    @*Menu*@
+                                    <div class="container-fluid">
+                                        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                                            <ul class="navbar-nav" style="margin-left: 0px; width:650px">
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="@Url.Action("index","Home",new { @class = "nav-link" })">Trang Chủ</a>
+                                                    <span class="sr-only">(current)</span>
+                                                </li>
+
+                                                <li class="nav-item dropdown">
+                                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Sách</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>@Html.Action("ChudePartial", "ChuDe")</li>
+                                                        <li class="li-a-Book" style="width:100px; text-align:center">
+                                                            <a href="@Url.Action("TatCa", "Sach")"
+                                                               class="a-allBook">Tất cả sách</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li class="nav-item dropdown">
+                                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Nhà xuất bản</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>@Html.Action("NhaXuatBanPartial", "NhaXuatBan")</li>
+                                                        <li class="li-a-Book" style="width:100px; text-align:center">
+                                                            <a href="@Url.Action("TatCa", "Sach")"
+                                                               class="a-allBook">Tất cả sách</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="@Url.Action("HuongDan","Home")">Hướng dẫn</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="@Url.Action("GioiThieu","Home")">Giới Thiệu</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <p class="navbar-brand" href="">
+
+                                        @using (Html.BeginForm("KetQuaTimKiem", "Sach", FormMethod.Post))
+                                        {
+                                            <div class="input-group" style="margin-left:-150px; width:240px">
+
+                                                <input class="form-control" id="txtTimKiem" name="txtTimKiem" placeholder="Nhập từ khóa cần tìm" type="text" value="" style="height:30px;">
+
+                                                <button class="button_search" type="submit" style="height:30px;">
+                                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                                </button>
+                                            </div>
+                                        }
+                                    </p>
+                                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                        <span class=""> </span>
+                                    </button>
+
+
+
+                                    <div class="user_option_box" style="width:560px;">
+                                        @Html.Action("KhachHangPartial", "NguoiDung")
+
+
+                                        <a href="" class="cart-link">
+                                            <span>
+                                                @Html.Action("GioHangPartial", "GioHang")
+
+                                                @Html.ActionLink("Giỏ Hàng", "GioHang", "GioHang")
+                                            </span>
+                                        </a>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+        <div class="alert alert-unsuccess" id="alert">
+            <strong>Unsuccessfully!!!</strong>
+        </div>
+        <div class="alert alert-success" id="alert">
+            <strong id="text_success">Bạn đã đặt hàng thành công!!!</strong>
+        </div>
+
+        @*-----Banner/nivo Slider------*@
+
+        @RenderBody()
+        @*Chu de*@
+
+
+        @*Nha Xuat Ban*@
+
+    </div>
+
+
+    @* -----------------*@
+    <section class="info_section " style="padding-top:40px; padding-bottom:0px">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3" style="border-right: 1px solid #cecece">
+                    <div class="info_contact">
+                        <div class="contact_nav">
+                            <a href="@Url.Action("Index", "Home")" style="color:#F3c93e">
+
+                                <span class="nav-icon">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-book fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="width:40px; height:40px">
+                                        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z" />
+                                    </svg>
+                                </span>
+                                <span class="logo-text">BOOK<b style="font-size:12px">Plus</b></span>
+
+                            </a>
+                        </div>
+
+                        <p>
+                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            828 Sư Vạn Hạnh, Phường 12, Quận 10, Thành phố Hồ Chí Minh
+                        </p>
+                        <p>
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            (+84 28) 38 632
+                        </p>
+                        <p>
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                            <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9efafbf3f1def9f3fff7f2b0fdf1f3">[contact@huflit.edu.vn]</a>
+                        </p>
+                    </div>
+
+                </div>
+
+
+
+                @*Cột giữa*@
+                <div class="col-md-3" style="padding-right: 30px; border-right: 1px solid #cecece ">
+                    <div class="info_links">
+                        <h5>
+                            Dịch vụ
+                        </h5>
+                        <ul style="line-height:35px;">
+                            <li>
+
+                                <a href="@Url.Action("index","Home",new { @class = "nav-link" })" class="a-dv">Điều khoản sử dụng</a>
+
+                            </li>
+                            <li class="li-dv">
+                                <a href="@Url.Action("GioiThieu","Home")" class="a-dv">Chính sách bảo mật</a>
+
+
+                            </li>
+                            <li class="li-dv">
+
+                                <a href="@Url.Action("LienHe","Home")" class="a-dv">Giới thiệu BookPlus</a>
+                            </li>
+                            <li class="li-dv">
+                                <a href="@Url.Action("HuongDan","Home")" class="a-dv">Chính sách thanh toán</a>
+
+                            </li>
+                            <li class="li-dv">
+                                <a href="@Url.Action("TatCa", "Sach")" class="a-dv">Hệ thống chúng tôi</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="info_form ">
+                        <h5>
+                            Tra cứu đơn hàng
+                        </h5>
+
+                        @using (Html.BeginForm("TraCuuDonHang", "Home", FormMethod.Post))
+                        {
+
+                            <input id="txtTimKiemDonHang" name="txtTimKiemDonHang" placeholder="Nhập số điện thoại hoặc mã đơn hàng..." type="text" value="" />
+                            <button type="submit">
+                                Tra cứu
+                            </button>
+                        }
+                        <div class="social_box">
+                            <a href="">
+                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                            </a>
+                            <a href="">
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+                            <a href="">
+                                <i class="fa fa-instagram" aria-hidden="true"></i>
+                            </a>
+                            <a href="">
+                                <i class="fa fa-youtube" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer_section">
+        <div class="container">
+            <p>
+                © <span id="displayYear"></span> Website Bán Sách
+            </p>
+        </div>
+    </footer>
+    <script type="text/javascript">
+        $(window).load(function () {
+            $('#slider').nivoSlider();
+        });
+        pauseOnHover: true;
+        controlNav: false;
+
+    </script>
+
+</body>
+
+</html>

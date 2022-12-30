@@ -1,0 +1,386 @@
+﻿
+@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.PagedList<WebsiteBanSach.Models.Admin>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<style>
+    .menuTrang {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+        .menuTrang li {
+            display: inline;
+            border: 1px solid black;
+            border-radius: 8px;
+            width: 40px;
+            text-align: center;
+            color: white;
+            margin-left: 0.8%
+        }
+
+    li.active {
+        color: white;
+        background-color: darkseagreen
+    }
+
+    .table {
+        border-collapse: separate;
+        border-spacing: 0;
+        background-color: #EEEEEE;
+    }
+
+    tr {
+        justify-self: center;
+        text-align: center;
+    }
+
+    table.striped > tbody > tr > td:first-child {
+        border-radius: 10px 0 0 10px;
+    }
+
+    table.striped > tbody > tr > td:last-child {
+        border-radius: 0 10px 10px 0;
+    }
+
+    .table-item {
+        border-radius: 1.2rem;
+        background-color: white;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: auto auto;
+        margin-bottom: 15px;
+        margin-top:20px
+    }
+
+    .grid-item {
+        padding-right: 20px;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+        margin: 0 auto;
+        width: 50%;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0, 0, 0, .2);
+        border-radius: .3rem;
+        outline: 0;
+    }
+
+    .modal-body {
+        padding: 1rem;
+    }
+
+    .modal-footer {
+        display: flex;
+        border-top: 1px solid #aaaaaa;
+        padding: 1rem;
+        flex-direction: row;
+        justify-content: flex-end;
+        border-top: 1px solid #aaaaaa;
+        padding: 1rem;
+    }
+
+        .modal-footer > :not(:first-child) {
+            margin-left: .25rem;
+        }
+
+    .btn {
+        cursor: pointer;
+        outline: none;
+        font-weight: 400;
+        line-height: 1.25;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        border: 1px solid transparent;
+        padding: .5rem 1rem;
+        font-size: 1rem;
+        border-radius: .25rem;
+        transition: all .2s ease-in-out;
+    }
+
+    .btn-secondary {
+        color: #292b2c;
+        background-color: #fff;
+        border-color: #ccc;
+    }
+
+    .btn-primary {
+        color: #fff;
+        background-color: #0275d8;
+        border-color: #0275d8;
+    }
+
+    .modal-header {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #aaaaaa;
+        padding: 1rem;
+    }
+
+    h5.modal-title {
+        font-size: 1.5rem;
+    }
+
+    .close {
+        color: #aaaaaa;
+        font-size: 28px;
+        font-weight: bold;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    .display-form {
+        padding-top: 30px;
+        padding-bottom: 30px;
+        background-color: white;
+        border-radius: 20px
+    }
+
+    .btn-trash {
+        display: none;
+    }
+    .nav-tool {
+        background-color: white;
+        width: 100%;
+        height: 70px;
+    }
+    .form-tool {
+
+        height: 70px;
+        display: table-cell;
+        vertical-align:middle
+    }
+    .btn_user {
+        color: #0000EE;
+        background-color:cornflowerblue;
+        border-radius:50px;
+        margin-left:10px;
+    }
+    @*.btn_user {
+        color: gray;
+        background-color: antiquewhite;
+        border-radius: 50px;
+        margin-left: 10px;
+
+    }*@
+</style>
+<div class="nav-tool">
+    <div class="form-tool">
+        <button type="button" class="btn btn_user" onclick="location.href='@Url.Action("LoyalCustomer", "User")'">Loyal Customer</button>
+        <button type="button" class="btn btn_user active" onclick="location.href='@Url.Action("Admin", "User")'">Admin</button>
+        <button type="button" class="btn btn_user" onclick="location.href='@Url.Action("VisitorCustomer", "User")'">Normal Customer</button>
+
+    </div>
+</div>
+
+<div class="grid">
+    <div class="grid-item">
+        <form class="app-search-form" method="post" style="width:auto">
+            <input type="text" placeholder="Search admin username..." id="txtTimKiemAd" name="txtTimKiemAd" class="form-control search-input" onkeyup="SearchByColumn(2)">
+            <button style="margin-top:5px;margin-bottom:5px" type="submit" class="btn search-btn btn-primary" value="Search"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+    <div class="grid-item">
+
+    </div>
+</div>
+<div class="display-form">
+    <div style="margin-left:50px;margin-right:50px">
+        <button type="button" class="btn btn-success" style="color:white" onclick="location.href='@Url.Action("CreateAdmin", "User")'">
+            <i class="fa-solid fa-plus" style="margin-right:5px"></i>Add Admin
+        </button>
+
+        <hr />
+        <span style="margin:10px">@ViewBag.Count </span>
+        <button type="button" class="btn btn-trash" style="color:red; background-color:pink;margin:10px" onclick="DeleteSelected()">
+            <i class="fa-solid fa-trash" style="margin-right:5px"></i>Delete Seleted
+        </button>
+    </div>
+
+    <table class="table" id="table">
+        <colgroup>
+            <col width="5" span="1">
+            <col width="100" span="1">
+            <col width="100" span="1">
+            <col width="100" span="1">
+            <col width="100" span="1">
+        </colgroup>
+        <tr class="table-secondary table-bordered">
+            <th>
+                <input type="checkbox" id="checkall" onclick="SelectAll()">
+            </th>
+            <th>
+                ID
+            </th>
+            <th>
+                UserName
+            </th>
+            <th>
+               Password
+            </th>
+            
+            <th>Edit|Delete</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr class="table-item" >
+                <td>
+                    <input type="checkbox" class="check-item" id="@item.MaAD">
+                </td>
+
+                <td style="text-align:center">
+
+                    @Html.DisplayFor(modelItem => item.MaAD)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaiKhoan)
+                </td>
+                <td type="password">
+                    @Html.DisplayFor(modelItem => item.MatKhau)
+                </td>
+
+                
+                <td>
+                    @{
+
+                        int a = item.MaAD;
+
+                    }
+                    @Html.ActionLink("Edit", "Edit", new { @MaSach = item.MaAD }) |
+
+                    @Html.ActionLink("Delete", "DeleteConfirmed", new { @id = item.MaAD }, new { onclick = "return confirm('Are you sure want to delete this admin?')" })
+
+                </td>
+            </tr>
+        }
+
+
+    </table>
+</div>
+@*Tao link lien ket caca trang *@
+<center>
+    <p><b>Trang</b> @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount</p>
+    <div class="menuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+    </div>
+</center>
+
+<script>
+                     var table = document.getElementById("table");
+                    var input = document.getElementById("txtTimKiemAd");
+                    var tr = table.getElementsByTagName("tr");
+
+                    var myArray = [];
+                     @foreach (var item in Model)
+                            {
+                                @:myArray.push('@item.MaAD');
+                            }
+                    console.log(myArray);
+                    var checkAll = document.getElementById("checkall");
+
+                    //Chọn tất cả item
+                    function SelectAll() {
+
+                        if (checkAll.checked == true) {
+
+                            myArray.forEach(checkItemTrue);
+                            document.getElementsByClassName("btn btn-trash")[0].style.display = "inline";
+                        }
+                        else {
+                            myArray.forEach(checkItemFalse);
+                            document.getElementsByClassName("btn btn-trash")[0].style.display = "none";
+                        }
+                    }
+
+                    // Bật check
+                    function checkItemTrue(item) {
+                        var check = document.getElementById(item);
+                        check.checked = true;
+                    }
+                    //Tắt check
+                    function checkItemFalse(item) {
+                        var check = document.getElementById(item);
+                        check.checked = false;
+                    }
+                    function DeleteSelected() {
+
+                        if (confirm("Bạn có chắc chắn xóa " + GetSelected().length + " sản phẩm đã chọn?") == true) {
+                            GetSelected().forEach(deleteitem);
+                          // Session["Delete"]= GetSelected() as List<int>());
+                            return location.href = '/Product/Index';
+                        }
+
+                    }
+                    // Lấy những item được chọn
+                    var list=[] ;
+                    function GetSelected() {
+                        list = [];
+                        myArray.forEach(Add);
+                        return list;
+                    }
+                    function Add(item) {
+                        if (document.getElementById(item).checked == true)
+                            list.push(item);
+                    }
+                    function deleteitem(item) {
+                        return location.href = '/Product/DeleteAll/"2"';
+                    }
+                    function SearchByColumn(num) {
+                        var filter, td, i, txtValue;
+                        filter = input.value.toUpperCase();
+
+
+                        for (i = 0; i < tr.length; i++) {
+                            td = tr[i].getElementsByTagName("td")[num];
+                            if (td) {
+                                txtValue = td.innerText;
+                                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                    tr[i].style.display = "";
+                                } else {
+                                    tr[i].style.display = "none";
+                                }
+                            }
+                        }
+                    }
+</script>
+

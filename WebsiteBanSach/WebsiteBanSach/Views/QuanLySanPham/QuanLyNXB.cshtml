@@ -1,0 +1,87 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.PagedList<WebsiteBanSach.Models.NhaXuatBan>
+
+@{
+    ViewBag.Title = "QuanLyNXB";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+<style>
+    .menuTrang {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+        .menuTrang li {
+            display: inline;
+            border: 1px solid black;
+            border-radius: 8px;
+            width: 40px;
+            text-align: center;
+            color: white;
+            margin-left: 0.8%
+        }
+
+    li.active {
+        color: white;
+        background-color: darkseagreen
+    }
+
+    tr {
+        text-align: center
+    }
+</style>
+<h2 style="text-align:center;padding-bottom:2%">Quản Lý Nhà Xuất Bản</h2>
+
+<p>
+    @Html.ActionLink("Thêm nhà xuất bản", "ThemNXB")
+</p>
+<table class="table table-bordered table-sm">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MaNXB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().TenNXB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().DiaChi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().DienThoai)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaNXB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenNXB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DienThoai)
+            </td>
+            <td>
+                @Html.ActionLink("Chỉnh Sửa", "ChinhSuaNXB", new {@MaNXB = item.MaNXB}) |
+                @Html.ActionLink("Xóa", "XoaNXB", new { @MaNXB = item.MaNXB })
+            </td>
+        </tr>
+    }
+
+</table>
+@*Tao link lien ket caca trang *@
+<center>
+    <p><b>Trang</b> @(Model.PageCount<Model.PageNumber?0:Model.PageNumber) / @Model.PageCount</p>
+    <div class="menuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("QuanLyNXB", new { page = page }))
+    </div>
+</center>

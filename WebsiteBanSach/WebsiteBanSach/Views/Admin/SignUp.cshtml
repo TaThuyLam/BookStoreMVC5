@@ -1,0 +1,66 @@
+﻿@model WebsiteBanSach.Models.Admin
+
+@{
+    ViewBag.Title = "SignUp";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<h4>Đăng Ký<b style="font-size:15px;font-family:Arial, Helvetica, sans-serif;color:darkseagreen"> Admin</b></h4>
+<h2>@ViewBag.ThongBao</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+       
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+       
+
+        <div class="form-group">
+            <label class="control-label col-md-2"> Tài khoản</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TaiKhoan, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TaiKhoan, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Mật Khẩu</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="padding-top:2%">
+                
+                <button type="submit" id="btnSubmit" name="btnSubmit" class="btn btn-primary col-md-offset-2 col-md-10"
+                        style="padding-top:1%;padding-left: 2.5rem; padding-right: 2.5rem;width:18%">
+                    Đăng Ký
+                </button>
+            </div>
+        </div>
+    </div>
+}
+<div style="padding-top:1%">
+    
+    <a href=" @if (Session != null)
+                                {
+                                    @Url.Action("Index", "QuanLySanPham")
+                          
+                                  
+                                }
+                                else {
+                                      @Url.Action("LogIn", "Admin")
+                                } 
+
+    ">Đăng Nhập</a>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

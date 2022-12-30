@@ -1,0 +1,415 @@
+﻿@model List<WebsiteBanSach.Models.DonHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+<head>
+
+
+    <style>
+        :root {
+            --backGr-btn: #a9c6fc;
+        }
+            .menuTrang {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+            .menuTrang li {
+                display: inline;
+                border: 1px solid black;
+                border-radius: 8px;
+                width: 40px;
+                text-align: center;
+                color: white;
+                margin-left: 0.8%
+            }
+
+        li.active {
+            color: white;
+            background-color: bisque
+        }
+
+        tr {
+            text-align: center
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: auto auto auto auto auto;
+            margin-bottom: 15px;
+            margin-top: 20px
+        }
+
+        .grid-item {
+            padding-right: 20px;
+        }
+
+        .nut_dropdown {
+            border: 1px solid lightgrey;
+            width: auto;
+        }
+
+        .nut_dropdown {
+            border: 1px solid lightgrey;
+            width: auto;
+        }
+        /* Thiết lập vị trí cho thẻ div với class dropdown*/
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .table-item {
+            border-radius: 1.2rem;
+            background-color: white;
+        }
+
+        /* Nội dung Dropdown */
+        .noidung_dropdown {
+            /*Ẩn nội dụng các đường dẫn*/
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            /* Thiết kế style cho các đường dẫn tronng Dropdown */
+            .noidung_dropdown a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+        .hienThi {
+            display: block;
+        }
+        .nav-tool {
+            background-color: white;
+            width: 100%;
+            height: 70px;
+        }
+
+        .form-tool {
+            height: 70px;
+            display: table-cell;
+            vertical-align: middle
+        }
+
+        .btn_user {
+            color: #0000EE;
+            background-color: var(--backGr-btn);
+            border-radius: 50px;
+            margin-left: 10px;
+        }
+        .table .table-item {
+           text-align:left
+        }
+        .table-item:hover{
+            background-color:cornflowerblue;
+            color:white;
+            font-weight:bold
+            
+        }
+        .btn_user {
+            color: #0000EE;
+            background-color: var(--backGr-btn);
+            border-radius: 50px;
+            margin-left: 10px;
+
+        }
+        .note_bg {
+            position: relative;
+            display: inline;
+            align-items: center;
+            justify-content: center;
+            width:auto;
+        }
+        .notification {
+            position: absolute;
+            top: 0px;
+            right: 0;
+            background: rgb(216, 59, 1);
+            border: 1px solid rgb(255, 147, 73);
+            box-sizing: border-box;
+            box-shadow: rgb(0 0 0 / 13%) 0px 3.2px 7.2px, rgb(0 0 0 / 11%) 0px 0.6px 1.8px;
+            border-radius: 16px;
+            width: 16px;
+            height: 16px;
+            color: rgb(255, 255, 255);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<div class="nav-tool">
+    <div class="form-tool">
+        <button type="button" class="btn btn_user active" onclick="location.href='@Url.Action("Index", "Order")'">All</button>
+        <div class="note_bg">
+            <button type="button" class="btn btn_user" onclick="location.href='@Url.Action("Index", "Order",new { @tt=0})'">Unfinished</button>
+            <span class="notification">@ViewBag.UnPrepared</span>
+        </div>
+        <div class="note_bg">
+            <button type="button" class="btn btn_user" onclick="location.href='@Url.Action("Index", "Order",new { @tt=1})'">Shipping</button>
+            <span class="notification">@ViewBag.UnShipping</span>
+        </div>
+       
+        <div class="note_bg">
+            <button type="button" class="btn btn_user" onclick="location.href='@Url.Action("Index", "Order",new { @tt=-1})'">Wait for cancel</button>
+            <span class="notification">@ViewBag.UnCancel</span>
+        </div>
+        <button type="button" class="btn btn_user" onclick="location.href='@Url.Action("Index", "Order",new { @tt=-2})'">Canceled</button>
+        <button type="button" class="btn btn_user" onclick="location.href='@Url.Action("Index", "Order",new { @tt=3})'">Finished</button>
+    </div>
+
+</div>
+<div class="grid">
+    <div class="grid-item">
+        <form class="app-search-form" method="post" style="width:auto">
+            <input type="text" placeholder="Tìm mã đơn hàng..." id="txtTimKiemAd" name="txtTimKiemAd" class="form-control search-input" onkeyup="SearchByColumn(1)">
+            <button style="margin-top:5px;margin-bottom:5px" type="submit" class="btn search-btn btn-primary" value="Search"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+    <div class="grid-item">
+        <input type="date" id="DateFrom" class="form-control">
+    </div>
+    <div class="grid-item">
+        <input type="date" id="DateTo" class="form-control">
+    </div>
+    <div class="grid-item">
+        <input type="button" id="btn_SubmitLoc" value="Lọc" class="btn btn-success">
+    </div>
+    <div class="grid-item">
+        <button onclick="location.href='@Url.Action("Create", "Order")'" type="button" class="btn btn-success" style="color:white"> <i class="fa-solid fa-plus" style="margin-right:5px"></i>Add</button>
+    </div>
+</div>
+
+
+<table class="table" id="table">
+    <colgroup>
+        <col width="5" span="1">
+        <col width="40" span="1">
+        <col width="100" span="1">
+        <col width=80 span="1">
+        <col width="120" span="2">
+        <col width="5" span="1">
+
+    </colgroup>
+    <tr class="table-secondary table-bordered">
+        <th style="text-align:left">
+            <input type="checkbox" id="checkall" onclick="SelectAll()">
+        </th>
+        <th style="text-align:left">
+            ID
+            <svg onclick="sortTable(1)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-alpha-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10.082 5.629 9.664 7H8.598l1.789-5.332h1.234L13.402 7h-1.12l-.419-1.371h-1.781zm1.57-.785L11 2.687h-.047l-.652 2.157h1.351z" />
+                <path d="M12.96 14H9.028v-.691l2.579-3.72v-.054H9.098v-.867h3.785v.691l-2.567 3.72v.054h2.645V14zM4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293V2.5z" />
+            </svg>
+        </th>
+        <th>
+            Khách hàng
+            <svg onclick="sortTable(2)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-alpha-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10.082 5.629 9.664 7H8.598l1.789-5.332h1.234L13.402 7h-1.12l-.419-1.371h-1.781zm1.57-.785L11 2.687h-.047l-.652 2.157h1.351z" />
+                <path d="M12.96 14H9.028v-.691l2.579-3.72v-.054H9.098v-.867h3.785v.691l-2.567 3.72v.054h2.645V14zM4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293V2.5z" />
+            </svg>
+        </th>
+        <th>
+            Ngày đặt
+            <svg onclick="sortTable(3)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-alpha-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10.082 5.629 9.664 7H8.598l1.789-5.332h1.234L13.402 7h-1.12l-.419-1.371h-1.781zm1.57-.785L11 2.687h-.047l-.652 2.157h1.351z" />
+                <path d="M12.96 14H9.028v-.691l2.579-3.72v-.054H9.098v-.867h3.785v.691l-2.567 3.72v.054h2.645V14zM4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293V2.5z" />
+            </svg>
+        </th>
+        <th>
+            Tổng tiền
+            <svg onclick="sortTable(4)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-alpha-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10.082 5.629 9.664 7H8.598l1.789-5.332h1.234L13.402 7h-1.12l-.419-1.371h-1.781zm1.57-.785L11 2.687h-.047l-.652 2.157h1.351z" />
+                <path d="M12.96 14H9.028v-.691l2.579-3.72v-.054H9.098v-.867h3.785v.691l-2.567 3.72v.054h2.645V14zM4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293V2.5z" />
+            </svg>
+        </th>
+        <th>
+            Tình trạng đơn hàng
+            <svg onclick="sortTable(5)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-alpha-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10.082 5.629 9.664 7H8.598l1.789-5.332h1.234L13.402 7h-1.12l-.419-1.371h-1.781zm1.57-.785L11 2.687h-.047l-.652 2.157h1.351z" />
+                <path d="M12.96 14H9.028v-.691l2.579-3.72v-.054H9.098v-.867h3.785v.691l-2.567 3.72v.054h2.645V14zM4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293V2.5z" />
+            </svg>
+            <div style="display:inline;margin-left:30px" onclick="DropdownTable()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                </svg>
+            </div>
+        </th>
+
+
+
+    </tr>
+    <tbody id="table_1" value="0">
+        @foreach (var item in Model)
+        {
+
+            <tr class="table-item" onclick="return location.href='@Url.Action("Edit",new {@id=item.MaDonHang})'">
+                <td>
+                    <input type="checkbox" class="check-item" id="@item.MaDonHang">
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaDonHang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenKH)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayDat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TongTien)
+                </td>
+                <td>
+                    @if (item.TinhTrangGiaoHang == 0)
+                    {
+
+                        <p style="color: #336600 ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="#336600" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                <circle cx="8" cy="8" r="8" />
+                            </svg>   Đang soạn đơn
+                        </p>
+                    }
+                    else if (item.TinhTrangGiaoHang == 1)
+                    {
+
+                        <p style="color:green">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="green" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                <circle cx="8" cy="8" r="8" />
+                            </svg>  Đang giao hàng
+                        </p>
+                    }
+                    else if (item.TinhTrangGiaoHang == -1)
+                    {
+
+                        <p style="color: #FF6699">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="#FF6699" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                <circle cx="8" cy="8" r="8" />
+                            </svg>  Chờ hủy đơn
+                        </p>
+                    }
+                    else if (item.TinhTrangGiaoHang == -2)
+                    {
+
+                        <p style="color:red">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                <circle cx="8" cy="8" r="8" />
+                            </svg>  Đã hủy
+                        </p>
+                    }
+                    else if (item.TinhTrangGiaoHang == 3)
+                    {
+
+                        <p style="color:red">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                <circle cx="8" cy="8" r="8" />
+                            </svg>  Đã hoàn thành
+                        </p>
+                    }
+                </td>
+            </tr>
+
+        }
+    </tbody>
+    </table>
+<script>
+    var btn_Loc = document.getElementById("btn_SubmitLoc");
+    var datefrom = document.getElementById("DateFrom");
+    var dateto = document.getElementById("DateTo");
+    var table=document.getElementById("table");
+    var input = document.getElementById("txtTimKiemAd");
+    var tr = table.getElementsByTagName("tr");
+    btn_Loc.onclick = function () {
+        FilterByDate();
+        sortTable(5);
+
+    }
+    function sortTable(col) {
+        var switching, rows, i, x, y, shouldSwitch;
+        switching = true;
+        /*Make a loop that will continue until
+        no switching has been done:*/
+        while (switching) {
+            //start by saying: no switching is done:
+            switching = false;
+            rows = table.rows;
+            /*Loop through all table rows (except the
+            first, which contains table headers):*/
+            for (i = 1; i < (rows.length - 1); i++) {
+                //start by saying there should be no switching:
+                shouldSwitch = false;
+                /*Get the two elements you want to compare,
+                one from current row and one from the next:*/
+                x = rows[i].getElementsByTagName("td")[col];
+                y = rows[i + 1].getElementsByTagName("td")[col];
+                //check if the two rows should switch place:
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    //if so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            if (shouldSwitch) {
+                /*If a switch has been marked, make the switch
+                and mark that a switch has been done:*/
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+            }
+        }
+    }
+    function SearchByColumn(num) {
+        var filter, td, i, txtValue;
+        filter = input.value.toUpperCase();
+
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[num];
+            if (td) {
+                txtValue = td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+    function FilterByDate() {
+        var td, x,from,to;
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[3];
+            if (td) {
+                x = new Date(td.innerHTML);
+                from = new Date(datefrom.value);
+                to = new Date(dateto.value);
+                if (x>=from & x.getFullYear()>=from.getFullYear() & x<=to & x.getFullYear()<=to.getFullYear()) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+    function DropdownTable() {
+        var table_1 = document.getElementById("table_1");
+        if (table_1.value == "0") {
+            table_1.style = "display:none";
+            table_1.value = "1";
+        }
+        else {
+            table_1.style = "display:''";
+            table_1.value = "0";
+        }
+    }
+
+</script>

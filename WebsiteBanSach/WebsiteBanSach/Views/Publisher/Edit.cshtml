@@ -1,0 +1,108 @@
+﻿@model WebsiteBanSach.Models.NhaXuatBan
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+<head>
+
+</head>
+<style>
+    textarea.active {
+        border: none
+    }
+
+    .grid {
+        display: grid;
+        width: auto;
+        height: auto;
+        grid-template-columns: f fit-content() fit-content();
+        grid-template-rows: 70px 100px 100px 100px 200px 100px;
+    }
+
+    .grid-item {
+    }
+
+    .grid-item-1 {
+        grid-column-start: 2;
+        grid-column-end: 4;
+    }
+
+    .grid-item-2 {
+        grid-column-start: 1;
+        grid-column-end: 4;
+    }
+
+    .grid-item-3 {
+        grid-column-start: 1;
+        grid-column-end: 4;
+        grid-row-start: span 2;
+        margin-bottom: 10px
+    }
+
+    label {
+        color: black;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .form-control {
+        border-color: #5d6778;
+        padding-top: 0;
+        padding-bottom: 0;
+        box-shadow: 1px 1px 1px grey;
+    }
+</style>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="grid">
+
+        <div class="grid-item">
+            <h2>EDIT PUBLISHER</h2>
+        </div>
+        <div class="grid-item">
+
+        </div>
+        <div class="grid-item">
+            <div class="col-md-10" style="padding-top: 1%">
+                <p style="text-align:center;width:10%;background-color:whitesmoke;border:ridge;border-color:darkseagreen;border-radius:8px"><b>@Model.MaNXB</b></p>
+                @Html.Hidden("MaNXB", Model.MaNXB)
+            </div>
+        </div>
+        <div class="grid-item">
+            <label>Publisher name:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TenNXB, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TenNXB, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="grid-item">
+
+        </div>
+        <div class="grid-item">
+            <label>Address:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="grid-item">
+            <label>Phone:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DienThoai, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DienThoai, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="grid-item-2" style="justify-self:center">
+            <button type="button" onclick="this.form.submit()" class="btn btn-success" style="color:white"> Save</button>
+        </div>
+
+    </div>
+
+    }
+</body>
+

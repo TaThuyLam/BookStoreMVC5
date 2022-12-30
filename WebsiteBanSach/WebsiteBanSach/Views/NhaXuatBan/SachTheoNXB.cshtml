@@ -1,0 +1,76 @@
+﻿@using WebsiteBanSach.Models;
+@model List<Sach>
+
+@{
+    ViewBag.Title = "SachTheoNXB";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+
+
+@if (Model.Count == 0)
+{
+    <h1>@ViewBag.Sach</h1>
+}
+
+<div class="body_1">
+    <section class="product_section layout_padding">
+        <div class="container">
+            <div class="heading_container heading_center">
+                <h2>
+                    Các Loại Sách
+                </h2>
+            </div>
+            <div class="row">
+                @{
+                    int i = 0;
+
+                    foreach (var item in Model)
+                    {
+                        <div class="col-sm-6 col-lg-4">
+                            <div class="box">
+                                <div class="img-box">
+                                    <img src="@Url.Content("~/ImgProducts/" + item.AnhBia)" alt="">
+                                    @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMaSach = item.MaSach, @strUrl = Request.Url.ToString() }))
+                                    {
+                                        <span>
+                                            <input class="add_cart_btn" type="submit" value="Thêm vào giỏ hàng" style="border:none;background-color:none" />
+                                        </span>
+                                    }
+                                </div>
+                                <div class="detail-box">
+                                    <a href="@Url.Action("XemChiTiet","Sach", new {@masach = item.MaSach })" style="color:black">
+                                        <h5>
+                                            @item.TenSach
+                                        </h5>
+                                    </a>
+
+                                    <div class="product_info">
+                                        <h5>
+                                            @item.GiaBan <span><u>đ</u></span>
+                                        </h5>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        i += 1;
+                        if (i == 9)
+                        {
+                            break;
+                        }
+                    }
+
+                }
+            </div>
+            <div class="btn_box">
+                <a href="" class="view_more-link">
+                    Xem thêm
+                </a>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+
+

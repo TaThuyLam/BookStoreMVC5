@@ -1,0 +1,83 @@
+﻿
+<!DOCTYPE html>
+
+
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @*js*@
+    <script src="~/Content/TemplateAdmin/all.min.js"></script>
+    @*css*@
+    <link href="~/Content/TemplateAdmin/portal.css" rel="stylesheet" />
+    @*tinymce*@
+    @*<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+        <script>tinymce.init({ selector: 'textarea' });</script>*@
+    <style>
+        body {
+            position: relative;
+        }
+
+        .alert {
+            padding: 20px;
+            position: fixed;
+            color: white;
+            border-radius: 10px;
+            width: 300px;
+            top: 20%;
+            right: 5%;
+            z-index: 2;
+            display: none;
+            box-shadow: 10px 10px 5px grey;
+        }
+
+        .alert-unsuccess {
+            background-color: red;
+        }
+
+        .alert-success {
+            background-color: green;
+        }
+    </style>
+</head>
+@RenderSection("scripts", required: false)
+<body class="app">
+    <header class="app-header fixed-top" style="background-image: linear-gradient(to right, #0000EE, #00008B)">
+       
+    </header><!--//app-header-->
+    <div class="app-wrapper">
+
+        <div class="app-content pt-3 p-md-3 p-lg-4">
+
+
+            @RenderBody()
+        </div><!--//app-content-->
+
+        <footer class="app-footer">
+            <div class="container text-center py-3">
+                @*
+                    <small class="copyright">Designed with <span class="sr-only">love</span><i class="fas fa-heart" style="color: #fb866a;"></i> by <a class="app-link" href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
+                *@
+            </div>
+        </footer><!--//app-footer-->
+
+    </div><!--//app-wrapper-->
+    <!-- Javascript -->
+    <script src="~/Content/TemplateAdmin/popper.min.js"></script>
+    <script src="~/Content/TemplateAdmin/bootstrap.min.js"></script>
+
+
+    <!-- Charts JS -->
+    <script src="~/Content/TemplateAdmin/chart.min.js"></script>
+    <script src="~/Content/TemplateAdmin/index-charts.js"></script>
+
+
+    <!-- Page Specific JS -->
+    <script src="~/Content/TemplateAdmin/app.js"></script>
+
+</body>
+
+</html>
+

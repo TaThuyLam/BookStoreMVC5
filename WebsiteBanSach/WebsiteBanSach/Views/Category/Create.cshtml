@@ -1,0 +1,88 @@
+﻿@model WebsiteBanSach.Models.ChuDe
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+<head>
+
+</head>
+<style>
+    textarea.active {
+        border: none
+    }
+
+    .grid {
+        display: grid;
+        width: auto;
+        height: auto;
+        grid-template-columns: f fit-content() fit-content();
+        grid-template-rows: 70px 100px 100px 100px 200px 100px;
+    }
+
+    .grid-item {
+    }
+
+    .grid-item-1 {
+        grid-column-start: 2;
+        grid-column-end: 4;
+    }
+
+    .grid-item-2 {
+        grid-column-start: 1;
+        grid-column-end: 4;
+    }
+
+    .grid-item-3 {
+        grid-column-start: 1;
+        grid-column-end: 4;
+        grid-row-start: span 2;
+        margin-bottom: 10px
+    }
+
+    label {
+        color: black;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .form-control {
+        border-color: #5d6778;
+        padding-top: 0;
+        padding-bottom: 0;
+        box-shadow: 1px 1px 1px grey;
+    }
+</style>
+<body>
+    @using (Html.BeginForm("Create", "Publisher", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="grid">
+
+            <div class="grid-item">
+                <h2>CREATE CATEGORY</h2>
+            </div>
+            <div class="grid-item">
+
+            </div>
+            <div class="grid-item">
+            </div>
+            <div class="grid-item">
+                <label>Publisher name:</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TenChuDe, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TenChuDe, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="grid-item-2" style="justify-self:center">
+                <button type="button" onclick="this.form.submit()" class="btn btn-success" style="color:white"> Create</button>
+            </div>
+
+        </div>
+
+    }
+</body>
+

@@ -1,0 +1,158 @@
+﻿@model WebsiteBanSach.Models.Sach
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+<head>
+
+</head>
+<style>
+    textarea.active {
+        border: none
+    }
+
+    .grid {
+        display: grid;
+        width: auto;
+        height: auto;
+        grid-template-columns: f fit-content() fit-content();
+        grid-template-rows: 70px 100px 100px 100px 200px 100px;
+    }
+
+    .grid-item {
+    }
+
+    .grid-item-1 {
+        grid-column-start: 2;
+        grid-column-end: 4;
+    }
+
+    .grid-item-2 {
+        grid-column-start: 1;
+        grid-column-end: 4;
+    }
+
+    .grid-item-3 {
+        grid-column-start: 1;
+        grid-column-end: 4;
+        grid-row-start: span 2;
+        margin-bottom: 10px
+    }
+
+    label {
+        color: black;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .form-control {
+        border-color: #5d6778;
+        padding-top: 0;
+        padding-bottom: 0;
+        box-shadow: 1px 1px 1px grey;
+    }
+</style>
+<body>
+    @using (Html.BeginForm("Create", "Product", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="grid">
+
+            <div class="grid-item">
+                <h2>CREATE PRODUCT</h2>
+            </div>
+            <div class="grid-item">
+
+            </div>
+            <div class="grid-item">
+
+            </div>
+            <div class="grid-item">
+                <label>Book name:</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TenSach, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TenSach, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="grid-item">
+
+            </div>
+            <div class="grid-item">
+                <label>Quantity:</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SoLuongTon, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SoLuongTon, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="grid-item">
+                <label>Price:</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.GiaBan, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.GiaBan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="grid-item">
+                <label>Publisher:</label>
+                <div class="col-md-10">
+
+                    @Html.DropDownListFor(model => model.MaNXB, ViewBag.MaNXB as SelectList, null, new { @class = "form-control" })
+
+                </div>
+            </div>
+            <div class="grid-item">
+                <label>Category:</label>
+                <div class="col-md-10">
+                    @Html.DropDownList("MaChuDe", (IEnumerable<SelectListItem>)ViewBag.MaChuDe, new { @class = "form-control dropdown" })
+
+                </div>
+            </div>
+            <div class="grid-item-3">
+                <label>Add Image</label>
+                <br />
+                <img id="anhSP" src="~/ImgProducts/noImage.png" width="120" style="margin:10px">
+                <div class="col-md-10">
+                    <input type="file" id="image_file" name="AnhBia" onchange="getImage()" />
+                </div>
+            </div>
+            <div class="grid-item-3">
+                <label>Description:</label>
+                <div class="col-md-10">
+
+                    <textarea class="form-control" name="MoTa" style="width:100%;height:150px" placeholder="Nhập mô tả"></textarea>
+                </div>
+            </div>
+            <div class="grid-item-2" style="justify-self:center">
+                <button type="button" onclick="this.form.submit()" class="btn btn-success" style="color:white"> Create</button>
+            </div>
+
+        </div>
+
+    }
+   
+    @if (TempData["unsuccess"] != null)
+    {
+        <script>
+
+            var alert_unsuccess = document.getElementsByClassName("alert-unsuccess")[0];
+            var text_unsuccess = document.getElementById("text_unsuccess");
+            alert_unsuccess.style = "display:flex";
+            setTimeout(function () {
+                alert_unsuccess.style = "display:none";
+            }, 3000);
+
+        </script>
+    }
+</body>
+<script>
+    function getImage() {
+        var file = document.getElementById('image_file').value;
+        var anhSP = document.getElementById('anhSP');
+        anhSP.src = "/ImgProducts/" + file.split(/(\\|\/)/g).pop();
+    }
+
+</script>
+

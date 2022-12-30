@@ -1,0 +1,236 @@
+﻿@model WebsiteBanSach.Models.DonHang
+@*//List<WebsiteBanSach.Models.Sach>*@
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+<head>
+    <style>
+        body {
+        }
+
+        .form {
+            background-color: white;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .grid {
+            background-color: white;
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            margin-bottom: 10px
+        }
+
+        .grid-item {
+            height: 50px;
+            margin: 10px
+        }
+
+        .lable {
+            font-size: 15px;
+            color: dimgrey;
+            margin: 0
+        }
+
+        .text {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0
+        }
+
+        input {
+            border: 0 solid;
+            background-color: white;
+        }
+
+        .btn_delete {
+            display: none;
+        }
+
+        .btn-danger, .btn-info, .btn-success {
+            width: 200px;
+            margin: 10px;
+            color: white;
+            box-shadow: inherit;
+        }
+
+        .btn_action {
+            height: 50px;
+            text-align: right;
+        }
+
+        .btn_reset, .btn_save {
+            width: 100px;
+            color: white;
+            margin: 10px;
+            display: none;
+        }
+
+        .btn_reset {
+            background-color: red;
+        }
+
+        .btn_save {
+            background-color: blue;
+        }
+    </style>
+</head>
+@{WebsiteBanSach.Models.DonHang i = new WebsiteBanSach.Models.DonHang();};
+@using (Html.BeginForm("Create", "Order",i))
+{
+    @Html.AntiForgeryToken()
+    <body onload="load()">
+
+        <div class="form">
+            <h5 class="text">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z" />
+                </svg>  Thông tin khách hàng
+            </h5>
+            <hr />
+            <div class="grid">
+                <div class="grid-item">
+                    <p class="text">Name</p>
+                    <p class="lable">
+                        @Html.EditorFor(model => model.TenKH, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TenKH, "", new { @class = "text-danger" })
+                        @* @Html.EditorFor(i => i.TenKH, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.TenKH, "", new { @class = "text-danger" })*@
+                    </p>
+                </div>
+                <div class="grid-item">
+                    <p class="text">Address</p>
+                    <p class="lable">
+                        @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                    </p>
+                </div>
+                <div class="grid-item">
+                    <p class="text">Phone</p>
+                    <p class="lable">
+                        @Html.EditorFor(model => model.SoDienThoai, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SoDienThoai, "", new { @class = "text-danger" })
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <div class="form">
+            <h5 class="text">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-columns-reverse" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M0 .5A.5.5 0 0 1 .5 0h2a.5.5 0 0 1 0 1h-2A.5.5 0 0 1 0 .5Zm4 0a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1h-10A.5.5 0 0 1 4 .5Zm-4 2A.5.5 0 0 1 .5 2h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5Zm-4 2A.5.5 0 0 1 .5 4h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5Zm-4 2A.5.5 0 0 1 .5 6h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm-4 2A.5.5 0 0 1 .5 8h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1h-10a.5.5 0 0 1-.5-.5Zm-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5Z" />
+                </svg> Danh sách sản phẩm
+                <i style="float:right;display:inline;padding:5px" onclick="InsertRow()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="blue" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                    </svg>
+                </i>
+            </h5>
+
+
+            <hr />
+            <div class="container mt-3" style="text-align:center">
+                <table class="table table-sm" id="table">
+                    <thead>
+                        <tr class="background-white">
+                            <th>#</th>
+                            <th>Sản phẩm</th>
+                            <th>Số Lượng</th>
+                            <th>Đơn giá</th>
+                            <th>Thành tiền</th>
+
+                        </tr>
+                    </thead>
+                    <tbody class="cart-item">
+
+                        <tr>
+                            <td class="number">
+                                1
+                            </td>
+                            <td>
+                                <input />
+                            </td>
+                            <td>
+                                <input />
+                            </td>
+                            <td>
+                                <input />
+                            </td>
+                            <td>
+                                <input />
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+                <div class="btn_action">
+                    <button type="button" class="btn btn_reset">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z" />
+                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z" />
+                        </svg>
+                        Reset
+                    </button>
+                    <button type="button" class="btn btn_save">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                        </svg>
+                        Save
+                    </button>
+                </div>
+
+
+            </div>
+
+        </div>
+        <div style="display:inline;float:right">
+            <button type="button" class="btn btn-success" onclick="this.form.submit()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                </svg> Save
+            </button>
+        </div>
+
+
+    </body>
+
+}
+
+<script>
+    var table = document.getElementById("table");
+    var tr = table.getElementsByTagName("tr");
+    function InsertRow() {
+        var row = table.insertRow(tr.length);
+        var cell0 = row.insertCell(0);
+        var cell1 = row.insertCell(1);
+        var cell2 = row.insertCell(2);
+        var cell3 = row.insertCell(3);
+        var cell4 = row.insertCell(4);
+        cell0.innerHTML = tr.length - 1;
+        cell1.innerHTML = "  <input />";
+        cell2.innerHTML = "  <input />";
+        cell3.innerHTML = "  <input />";
+        cell4.innerHTML = "";
+        TinhThanhTien();
+    }
+    function TinhThanhTien() {
+        tr = table.getElementsByTagName("tr");
+        for (var i = 1; i <= tr.length; i++) {
+            var s = 0;
+            var dongia = tr[i].getElementsByTagName("input")[2].value;
+            var soluong = tr[i].getElementsByTagName("input")[3].value;
+            s = dongia * soluong;
+            if (s == null) {
+                tr[i].getElementsByTagName("td")[4].innerHTML = 0;
+            }
+            else {
+                tr[i].getElementsByTagName("td")[4].innerHTML = s;
+            }
+        }
+
+    }
+</script>

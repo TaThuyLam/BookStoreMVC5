@@ -1,0 +1,92 @@
+﻿
+
+
+@using WebsiteBanSach.Models
+@model List<GioHang>
+@{
+    ViewBag.Title = "SuaGioHang";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+<style>
+    .delete-edit:hover {
+        color: red
+    }
+</style>
+<div class="container mt-3" style="text-align:center">
+    <h2> Giỏ Hàng</h2>
+    
+    <table class="table table-bordered table-sm">        
+        <thead>
+            <tr>
+                <th>Mã Sách</th>
+                <th>Tên Sách</th>
+                <th>Ảnh Bìa</th>
+                <th>Đơn Giá</th>
+                <th>Số Lượng</th>
+                <th>Thành Tiền</th>
+            </tr>
+        </thead>
+        <tbody class="cart-item">
+            @foreach (var item in Model)
+            {
+                <tr class="cart-rows">
+                    <td style="text-align:center">
+                        @item.iMaSach
+                    </td>
+                    <td>
+                        @item.sTenSach
+                    </td>
+
+                    <td>
+                        <img src="@Url.Content("~/ImgProducts/"+item.sAnhBia)" width="50" height="50" />
+                    </td>
+
+                    <td>
+                        <span class="dongia"> @string.Format("{0:0,0}", @item.dDonGia)</span> đ
+                    </td>
+
+                    @using (Html.BeginForm("CapNhapGioHang", "GioHang", new { @iMaSP = item.iMaSach }))
+                    {
+                        <td style="text-align:center" name="soluong">
+
+
+                            <input onchange="alertbox()"  type="number" name="txtSoLuong" value="@item.iSoLuong" style="width:20%;text-align:center;"/>
+                            @if (@item.iSoLuong <= 0)
+                            {
+                                <p style="color:red">Số Lượng phải lớn hơn 0</p>
+                            }
+                        </td>
+                        <td class="thanhtien">
+                            @if (@item.iSoLuong == 0)
+                            {
+                            <span>0<u>đ</u></span>
+
+                            }
+                            @if (@item.iSoLuong < 0)
+                            {
+                                <p style="color:red">Không thể tính</p>
+
+                            }
+                            @if (@item.iSoLuong > 0)
+
+                            {
+
+                                <span > @string.Format("{0:0,0}", item.ThanhTien)<u>đ</u></span>
+
+                            }
+                        </td>
+                        <td>
+                            <input type="submit" value="Cập nhật" />
+                            <br />
+                            @*Chỉnh suaử giỏ hàng gọi về action Xóa GioHang*@
+                            @Html.ActionLink("Xóa", "XoaGioHang", new { @iMaSP = item.iMaSach }, new { @class = "delete-edit" })
+                        </td>
+                     }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+

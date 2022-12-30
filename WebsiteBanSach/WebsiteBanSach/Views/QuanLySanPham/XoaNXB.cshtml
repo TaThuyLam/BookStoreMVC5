@@ -1,0 +1,57 @@
+﻿@model WebsiteBanSach.Models.NhaXuatBan
+
+@{
+    ViewBag.Title = "XoaNXB";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+
+
+<h3>Bạn có chắc muốn xóa nhà xuất bản này?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MaNXB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaNXB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenNXB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenNXB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaChi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DienThoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DienThoai)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <button type="submit" class="btn btn-primary" style="background-color:red;color:white">Xóa</button> <br />
+            @Html.ActionLink("Quay lại", "QuanLyNXB")
+        </div>
+    }
+</div>

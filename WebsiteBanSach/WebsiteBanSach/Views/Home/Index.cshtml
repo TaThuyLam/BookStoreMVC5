@@ -1,0 +1,280 @@
+﻿@model List<Sach>
+@using WebsiteBanSach.Models
+<head>
+    <link href="~/Content/TrangChuSanPham.css" rel="stylesheet" />
+    @{
+        Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+        ViewBag.Title = "Home";
+    }
+    <link href="~/Content/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="icon" href=@Url.Action("~/favicon.ico") sizes="22x22" />
+</head>
+
+<style>
+    :root {
+        --labelColor: #eb0000;
+        --colorOrange: #F3c93e;
+        --backgr: #3a4468;
+    }
+
+    .grid {
+        width: 100%;
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+    }
+
+    .box {
+        height: 400px;
+        width: 200px
+    }
+
+    .img-box:hover {
+        width: 215px;
+    }
+
+    .box-nxb-right {
+        background-color: #f8f8f8;
+        border-radius: 10px;
+        border: groove;
+        width: 800px;
+    }
+
+    .container-slide {
+        margin-left: 117px;
+        /*width: 800px;*/
+        margin-right: unset;
+    }
+
+    .img-right-top {
+        width: fit-content;
+    }
+
+    .row_slide {
+        display: flex;
+        justify-content: flex-start;
+        /*padding-top:70px;*/
+    }
+
+    .img-right {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+        margin-top: 5px;
+        flex-direction: column;
+    }
+
+    .label-Cate {
+        margin-left: 10px;
+    }
+
+    .rule {
+        width: 1120px;
+        margin-left: 20px;
+        height: 0px;
+        border: 1px solid var(--backgr);
+    }
+
+    .product_section .box .img-box {
+        background-color: white;
+    }
+
+    #item-Sach:hover {
+        box-shadow: 10px 1px 30px 1px #e8e8e8;
+        transition: transform .5s;
+        /*border: 1px solid black;*/
+    }
+
+    .product_section .box .img-box::before {
+        background-color: gainsboro;
+    }
+
+    .img-item {
+        width: 120%;
+        height: 193px;
+    }
+
+    .layout_padding {
+        padding-top: 0px;
+    }
+</style>
+@*nivo-slider*@
+<div class="container-slide">
+    <div class="row_slide">
+        <div class="col-lg-6" style="width:770px">
+            <div class="slider-wrapper theme-light" style="width:100%;padding-right:0px ">
+                <div id="slider" class="nivoSlider" style="height:fit-content">
+                    <img src="~/Img/slideshow_book2.jpg" style="width:100%;" />
+                    <img src="~/Img/top-7-tac-pham-cua-vu-trong-phung-min.jpg" style="width: 750px; height: 393px " />
+                </div>
+                <br />
+            </div>
+        </div>
+        <div class="img-right">
+            <div class="img-right-top">
+                <img src="~/Img/Holmes-Slider.jpg" class="img-item" />
+            </div>
+            <div class="img-right-bottom" style="margin-top:13px">
+                <img src="~/Img/vn100.jpg" class="img-item" />
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+@**@
+<div class="body_1">
+    <section class="product_section layout_padding">
+        <div class="container">
+            <div class="heading_container heading_center" style="display:flex; flex-direction:row; border-collapse:collapse">
+                <div class="label-Cate">
+                    <h3 style="color:var(--labelColor); font-weight:bold">SÁCH MỚI</h3>
+                </div>
+                <div class="rule">
+
+                </div>
+            </div>
+            <div class="grid" style="width:90%; margin-left:100px;">
+                @{
+
+                    List<Sach> moinhat = (List<Sach>)ViewBag.SachMoi;
+                    if (moinhat == null)
+                    {
+                        moinhat = new List<Sach>();
+                    }
+                    foreach (var item in moinhat)
+                    {
+                        <div class="col-sm-4 col-lg-3" style="width:fit-content">
+                            <div class="box" style="background-color:white" id="item-Sach">
+                                                <div class="img-box">
+                                                    <img src="@Url.Content("~/ImgProducts/" + item.AnhBia)" alt="anhsp">
+                                                    @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMaSach = item.MaSach, @strUrl = Request.Url.ToString() }))
+                                                    {
+                                                        if (item.SoLuongTon > 0)
+                                                        {
+                                                            <span>
+                                                                <input class="add_cart_btn" type="submit" value="Thêm vào giỏ hàng" style="border:none;background-color:none" />
+                                                            </span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span>
+                                                                <input class="add_cart_btn" onclick="alert('Sách không còn quyển nào!!!')" value="Hết hàng" style="border:none;background-color:red" />
+                                                            </span>
+                                                        }
+                                                    }
+                                                </div>
+                                <div class="detail-box" style="width:fit-content">
+                                    <a href="@Url.Action("XemChiTiet","Sach", new {@masach = item.MaSach })" style="color:black">
+                                        <h5>
+                                            @item.TenSach
+                                        </h5>
+                                    </a>
+                                    <div class="product_info">
+                                        <h5>
+                                            @string.Format("{0:0,0}", @item.GiaBan)<span><u style="text-decoration:none"> đ</u></span>
+                                        </h5>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                }
+            </div>
+            <div class="btn_box">
+                <a href="@Url.Action("TatCa", "Sach")" class="view_more-link">
+                    Xem thêm
+                </a>
+            </div>
+
+        </div>
+        <div class="container">
+            <div class="heading_container heading_center" style="display:flex; flex-direction:row; border-collapse:collapse">
+                <div class="label-Cate">
+                    <h3 style="color:var(--labelColor); font-weight:bold">BÁN CHẠY NHẤT</h3>
+                </div>
+                <div class="rule">
+
+                </div>
+            </div>
+            <div class="grid" style="width:90%; margin-left:100px;">
+                @{
+                    Dictionary<int, int> chiTiets = (Dictionary<int, int>)ViewBag.ChitietDonHang;
+
+                    List<Sach> banchaynhat = (List<Sach>)ViewBag.SachBanChay;
+                    if (banchaynhat == null)
+                    {
+                        banchaynhat = new List<Sach>();
+                    }
+                    foreach (var item in banchaynhat)
+                    {
+
+                        <div class="col-sm-4 col-lg-3" style="width:fit-content">
+                            <div class="box" style="background-color:white" id="item-Sach">
+                                <div class="img-box">
+                                    <img src="@Url.Content("~/ImgProducts/" + item.AnhBia)" alt="anhsp">
+                                    @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMaSach = item.MaSach, @strUrl = Request.Url.ToString() }))
+                                    {
+                                        if (item.SoLuongTon > 0)
+                                        {
+                                            <span>
+                                                <input class="add_cart_btn" type="submit" value="Thêm vào giỏ hàng" style="border:none;background-color:none" />
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span>
+                                                <input class="add_cart_btn" onclick="alert('Sách không còn quyển nào!!!')" value="Hết hàng" style="border:none;background-color:red" />
+                                            </span>
+                                        }
+                                    }
+                                </div>
+                                <div class="detail-box" style="width:fit-content">
+                                    <a href="@Url.Action("XemChiTiet","Sach", new {@masach = item.MaSach })" style="color:black">
+                                        <h5>
+                                            @item.TenSach
+                                        </h5>
+                                    </a>
+                                    <div class="product_info">
+                                        <h5>
+                                            @string.Format("{0:0,0}", @item.GiaBan)<span><u style="text-decoration:none"> đ</u></span>
+
+                                        </h5>
+
+                                    </div>
+                                    <p>
+                                        Đã bán: @chiTiets[item.MaSach] cuốn
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                }
+            </div>
+            <div class="btn_box">
+                <a href="@Url.Action("TatCa", "Sach")" class="view_more-link">
+                    Xem thêm
+                </a>
+            </div>
+
+        </div>
+    </section>
+    @if (TempData["message"] != null)
+    {
+        <script>
+
+            var alert_success = document.getElementsByClassName("alert-success")[0];
+            var text_success = document.getElementById("text_success");
+            alert_success.style = "display:flex";
+            setTimeout(function () {
+                alert_success.style = "display:none";
+            }, 3000);
+        </script>
+    }
+
+</div>
+
+

@@ -1,0 +1,43 @@
+﻿@using WebsiteBanSach.Models;
+@model List<NhaXuatBan>
+
+<style>
+    .item-cd {
+        color: black;
+        width: 100px;
+    }
+
+    #section {
+        height: 150px;
+        margin-bottom: 4%;
+        width: 440px;
+    }
+
+    .dropdown-item:active {
+        background-color: white;
+    }
+    .div-filter-cate{
+        display:grid;
+
+    }
+    a:hover{
+
+    }
+</style>
+<section id="section">    
+        <div class="div-filter-cate" style="display:grid; line-height:40px; width:fit-content">
+            @{                
+                //int y = 0;
+                foreach (var item in Model)
+                {
+                    
+                    <span>
+                        <a href="@Url.Action("SachTheoNXB", new { @machude = item.MaNXB})" style="float:left; color:black; font-size:13px">@item.TenNXB</a>
+                    </span>                                                                                               
+                }
+            }
+        </div>
+</section>
+
+
+

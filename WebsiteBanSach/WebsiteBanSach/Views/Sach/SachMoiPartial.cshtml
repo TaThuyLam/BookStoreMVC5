@@ -1,0 +1,56 @@
+﻿@using WebsiteBanSach.Models;
+@model List<Sach>
+
+<div class="menu-right" style="height:584px; border-radius:10px;font-family: 'Poppins', sans-serif;">
+    <div class="active">
+        <div class="">
+            <div style="padding: 5px; border-bottom: 1px groove;background-color:#F3C93E;border-top-left-radius:10px; border-top-right-radius:10px ">
+                <center style="color: black ">
+                    <h2>Sách mới</h2>
+                </center>
+            </div>
+            @{
+                int i = 0;
+                foreach (var item in Model)
+                {
+                    i += 1;
+                    if (i == 3)
+                    {
+                        <div class="menu-right-hover-last">
+                            <p>
+                                <img src="@Url.Content("~/ImgProducts/"+@item.AnhBia)" style="height:125px; width:100px">
+                                <span style="font-size:18px">
+                                    <strong style="color:#F3C93E">
+                                        @item.TenSach
+                                    </strong>                           
+                                </span>
+                                <br />
+                                <a href="@Url.Action("XemChiTiet", new {@masach = item.MaSach })"><strong style="color:black">Xem Chi Tiết</strong></a>
+                            </p>
+
+                        </div>
+                    }
+                    if (i <= 2)
+                    {
+                        <div class="menu-right-hover">
+                            <p>
+                                <img src="@Url.Content("~/ImgProducts/"+@item.AnhBia)" style="height:125px; width:100px">
+                                <span style="font-size:18px">
+                                    <strong style="color:#F3C93E">
+                                        @item.TenSach
+                                    </strong>
+                                </span>
+                                <br />
+                                <a href="@Url.Action("XemChiTiet", new {@masach = item.MaSach })"><strong style="color:black;">Xem Chi Tiết</strong></a>
+                            </p>
+                        </div>
+                    }
+                }
+
+            }
+        </div>
+    </div>    
+</div>
+
+
+
